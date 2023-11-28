@@ -19,8 +19,22 @@ const signUpUser = async (req, res) => {
       password: hashedPassword,
     });
     await newUser.save();
+
+    if (newUser) {
+      res.status(200).json({
+        _id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+        username: newUser.username,
+      });
+    }else{
+        res.status(400).json({ message: "invalid user data" });
+    }
+
+
   } catch (error) {
-    
+    res.status(500).json({ message: error.message })
+    console.log("Error in signupUser: ", error.message);
   }
 };
 
