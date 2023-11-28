@@ -2,7 +2,7 @@ const express = require('express')
 const dotenv = ("dotenv")
 const cookieParser = ("cookie-parser")
 const mongoose = ("mongoose")
-import userRoutes from "./routes/userRoutes"
+const userRoutes = ("./routes/userRoutes")
 
 dotenv.config();
 
