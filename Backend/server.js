@@ -1,7 +1,7 @@
-import express from "express";
-import dotenv from "dotenv";
-import cookieParser from "cookie-parser";
-import mongoose from "mongoose";
+const express = require('express')
+const dotenv = ("dotenv")
+const cookieParser = ("cookie-parser")
+const mongoose = ("mongoose")
 import userRoutes from "./routes/userRoutes"
 
 dotenv.config();
