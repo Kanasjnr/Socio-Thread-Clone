@@ -1,9 +1,8 @@
 const express = require('express')
-const dotenv = ("dotenv")
-const cookieParser = ("cookie-parser")
-const mongoose = ("mongoose")
-const userRoutes = ("./routes/userRoutes")
-
+const dotenv = require ("dotenv")
+const cookieParser = require ("cookie-parser")
+const mongoose = require ("mongoose")
+const userRoutes = require ("./routes/userRoutes")
 dotenv.config();
 
 const app = express();
