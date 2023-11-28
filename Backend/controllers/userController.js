@@ -18,8 +18,10 @@ const signUpUser = async (req, res) => {
       username,
       password: hashedPassword,
     });
-    await newUser.save()
-  } catch (error) {}
+    await newUser.save();
+  } catch (error) {
+    
+  }
 };
 
 module.exports = {
