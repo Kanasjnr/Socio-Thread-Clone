@@ -1,5 +1,5 @@
 const User = require('../models/userModel')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const signUpUser = async (req, res) => {
    try {
@@ -9,6 +9,7 @@ const signUpUser = async (req, res) => {
         if(user) {
             return res.status(400).json({message: 'user already exists'})
         }
+            const salt = await 
     
    } catch (error) {
     
