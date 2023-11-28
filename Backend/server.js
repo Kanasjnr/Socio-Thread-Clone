@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -15,7 +16,9 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
   res.send("Welcome Home 🏡");
 });
-
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`)})
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server Is Running On PORT ${PORT}`));
+  })
+  .catch((err) => console.log(err));
