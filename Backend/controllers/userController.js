@@ -9,7 +9,8 @@ const signUpUser = async (req, res) => {
         if(user) {
             return res.status(400).json({message: 'user already exists'})
         }
-            const salt = await 
+            const salt = await bcrypt.genSalt(10)
+            const hashedPassword = await bcrypt.hash(password, salt)
     
    } catch (error) {
     
