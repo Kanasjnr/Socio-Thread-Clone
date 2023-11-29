@@ -49,10 +49,41 @@ const loginUser = async (req, res) => {
 
     if (!user || !isPasswordCorrect)
       return res.status(400).json({ error: "invalid username or password" });
-  } catch (error) {}
+
+    if (user.isFrozen) {
+      user.isFrozen = false;
+      await user.save();
+    }
+
+    generateTokenAndSetCookie(user._id, res);
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      username: user.username,
+      bio: user.bio,
+      profilePicture: user.profilePicture,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+    console.log("Error in loginUser:", error.message);
+  }
 };
+
+const logoutUser = (req, res) => {
+  try {
+      res.cookie("jwt", "", {maxAge: 1})
+      res.status(200).json({menubar: "user logged out successfully"})
+  } catch (error) {
+      res.status(500).json({error: err.message});
+      console.log("Error in LogOutAde: ", err.message);        
+  }
+}
+
 
 module.exports = {
   signUpUser,
   loginUser,
+  logoutUser
+  
 };
