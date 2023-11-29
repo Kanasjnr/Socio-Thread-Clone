@@ -1,10 +1,20 @@
-const  express = require ('express')
-const { signUpUser,loginUser,logoutUser } = require ("../controllers/userController")
+const express = require("express");
+const {
+  signUpUser,
+  loginUser,
+  logoutUser,
+  followUnfollowUser,
+  getUserProfile,
+} = require("../controllers/userController");
+const protectRoute = require("../middleware/protectRoute");
 
-const router = express.Router()
+const router = express.Router();
 
-router.post("/signup", signUpUser)
-router.post("/login", loginUser)
-router.post("/logout", logoutUser)
+router.get("/profile/:query", getUserProfile);
 
-module.exports = router
+router.post("/signup", signUpUser);
+router.post("/login", loginUser);
+router.post("/logout", logoutUser);
+router.post("/follow/:id", protectRoute, followUnfollowUser); //toggle state (follow/unfollow)
+
+module.exports = router;
