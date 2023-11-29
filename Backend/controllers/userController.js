@@ -22,24 +22,37 @@ const signUpUser = async (req, res) => {
     await newUser.save();
 
     if (newUser) {
-        generateTokenAndSetCookie(newUser._id, res)
+      generateTokenAndSetCookie(newUser._id, res);
       res.status(200).json({
         _id: newUser._id,
         name: newUser.name,
         email: newUser.email,
         username: newUser.username,
       });
-    }else{
-        res.status(400).json({ message: "invalid user data" });
+    } else {
+      res.status(400).json({ message: "invalid user data" });
     }
-
-
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    res.status(500).json({ message: error.message });
     console.log("Error in signupUser: ", error.message);
   }
 };
 
+const loginUser = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      user?.password || ""
+    );
+
+    if (!user || !isPasswordCorrect)
+      return res.status(400).json({ error: "invalid username or password" });
+  } catch (error) {}
+};
+
 module.exports = {
   signUpUser,
+  loginUser,
 };
