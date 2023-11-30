@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const Post = require("../models/postModel");
 
 const createPost = async (req, res) => {
   try {
@@ -20,7 +21,7 @@ const createPost = async (req, res) => {
         return res.status(404).json({ message: `Text must be less than ${maxLength} characters` });
     }
 
-    const newPost = new post
+    const newPost = new Post
   } catch (error) {
     res.status(500).json({ message: error.message });
   console.log("Error in create post: ", error.message);
