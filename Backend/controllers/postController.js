@@ -107,7 +107,7 @@ const replyToPost = async (req, res) => {
     const username = req.user.username;
 
     if (!text) {
-      return res.status(400).json({ message: "text fiels is required" });
+      return res.status(400).json({ message: "text field is required" });
     }
 
     const post = await Post.findById(postId);
@@ -119,15 +119,39 @@ const replyToPost = async (req, res) => {
     const reply = { userId, text, userProfilepic, username };
 
     post.replies.push(reply);
-    await Post.save();
+    await post.save();
+
+    res.status(200).json({ message: "reply successfully added", post });
   } catch (error) {
     res.status(500).json({ message: error.message });
-    console.log("Error in create post: ", error.message);
+    console.log("Error in reply to post: ", error.message);
   }
 };
 
+const getFeedPost = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const following = user.following;
+
+    const feedPosts = await Post.find({ postedBy: { $in: following } }).sort({
+      createdAt: -1,
+    });
+
+    res.status(200).json({ feedPosts });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log("Error in get feed post: ", error.message);
+  }
+};
 module.exports = {
   createPost,
+  getFeedPost,
   getPost,
   deletePost,
   likeUnlikePost,
