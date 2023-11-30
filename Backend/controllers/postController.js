@@ -70,8 +70,11 @@ const deletePost = async (req, res) => {
     console.log("Error in delete post: ", error.message);
   }
 };
+
+const likeUnlikePost = async (req, res) => {}
 module.exports = {
   createPost,
   getPost,
   deletePost,
+  likeUnlikePost
 };
