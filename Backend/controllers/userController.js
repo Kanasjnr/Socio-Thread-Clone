@@ -140,17 +140,31 @@ const followUnfollowUser = async (req, res) => {
     console.log("Error in followUnFollowUser: ", err.message);
   }
 };
-
 const updateUser = async (req, res) => {
-  const { name, email, password, username, profilePic, bio } = req.body;
-  const userId = req.user._id;
+
+  const {name, email, username, password, profilePic, bio} = req.body
+  const userId = req.user._id
+
   try {
-    let user = await User.findById(userId);
+      let user = await User.findById(userId)
+      if (!user) return res.status(400).json({message: "Usernot found"})
+
+      if (password) {
+          const salt = await bcrypt.genSalt(10)
+          const hashedPassword = await bcrypt.hash(password, salt)
+          user.password = hashedPassword
+      }
+
+      user.name = name || user.name
+      user.email = email.user
+      
   } catch (error) {
-    res.status(500).json({ message: err.message }); //Internal server error
-    console.log("Error in Update Usesr ", err.message);
+      res.status(500).json({message: error.message})
+      console.log("Error in update User: ", error.message);
+      
   }
-};
+
+}
 
 module.exports = {
   followUnfollowUser,
