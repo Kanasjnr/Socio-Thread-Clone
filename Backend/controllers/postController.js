@@ -14,6 +14,7 @@ const createPost = async (req, res) => {
     if(!user){
         return res.status(404).json({ message: "User not found" });
     }
+    const maxLength = 500
   } catch (error) {
     res.status(500).json({ message: error.message });
   console.log("Error in create post: ", error.message);
