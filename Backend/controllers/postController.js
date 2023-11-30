@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const Post = require("../models/postModel");
+const { post } = require("../routes/postRoutes");
 
 const createPost = async (req, res) => {
   try {
@@ -52,6 +53,17 @@ const getPost = async (req, res) => {
 
 const deletePost = async (req, res) => {
   try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).json({ message: "post not found" });
+    }
+
+    if(post.postedBy.toString() !== req.user._id.toString()) {
+        return res.status(404).json({ message:"unathorized to delete post" });
+    }
+  
+    
   } catch (error) {
     res.status(500).json({ message: error.message });
     console.log("Error in delete post: ", error.message);
