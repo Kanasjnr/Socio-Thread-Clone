@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true })); // parse form data inside the r
 app.use(cookieParser());
 
 app.use("/api/users", userRoutes);
-app.use("/api/post", postRoutes);
+app.use("/api/posts", postRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome Home 🏡");
