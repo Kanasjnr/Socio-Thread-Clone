@@ -156,7 +156,14 @@ const updateUser = async (req, res) => {
       }
 
       user.name = name || user.name
-      user.email = email.user
+      user.email = email || user.email
+      user.username = username || user.username
+      user.profilePicture = profilePicture || user.profilePicture
+      user.bio = bio || user.bio
+
+      user = await user.save()
+
+      res.status(200).json({message: "profile updated successfully", user})
       
   } catch (error) {
       res.status(500).json({message: error.message})
