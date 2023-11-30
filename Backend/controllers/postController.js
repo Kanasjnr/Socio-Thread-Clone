@@ -52,14 +52,13 @@ const getPost = async (req, res) => {
 
 const deletePost = async (req, res) => {
   try {
-    
   } catch (error) {
     res.status(500).json({ message: error.message });
     console.log("Error in delete post: ", error.message);
   }
-}
+};
 module.exports = {
   createPost,
   getPost,
-  deletePost
+  deletePost,
 };
