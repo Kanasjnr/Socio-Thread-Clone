@@ -13,22 +13,19 @@ const getUserProfile = async (req, res) => {
     // query is userId
     if (mongoose.Types.ObjectId.isValid(query)) {
       user = await User.findOne({ _id: query }).select("-updatedAt");
-    }else{
+    } else {
       // query is username
-      user = await User.findOne({ username }).select("-password").select("-updatedAt");
+      user = await User.findOne({ username })
+        .select("-password")
+        .select("-updatedAt");
     }
-    if(!user)
-    return res.status(404).json({error: "User not found"})            
-    res.status(200).json(user)
-
-} catch (err) {
-res.status(500).json({error: err.message});
-console.log("Error in getUserProfile", err.message);
-}
-
+    if (!user) return res.status(404).json({ error: "User not found" });
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.log("Error in getUserProfile", err.message);
+  }
 };
-
-
 
 const signUpUser = async (req, res) => {
   try {
@@ -144,17 +141,16 @@ const followUnfollowUser = async (req, res) => {
   }
 };
 
-
 const updateUser = async (req, res) => {
-  const {name, email, password, username,profilePic,bio}= req.body
-  const userId = req.user._id
+  const { name, email, password, username, profilePic, bio } = req.body;
+  const userId = req.user._id;
   try {
-      let user = await User.findById(userId)
+    let user = await User.findById(userId);
   } catch (error) {
     res.status(500).json({ message: err.message }); //Internal server error
     console.log("Error in Update Usesr ", err.message);
   }
-}
+};
 
 module.exports = {
   followUnfollowUser,
@@ -162,5 +158,5 @@ module.exports = {
   loginUser,
   logoutUser,
   getUserProfile,
-  updateUser
+  updateUser,
 };
