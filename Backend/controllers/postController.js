@@ -44,7 +44,9 @@ const getPost = async (req, res) => {
     }
 
     res.status(200).json({ post });
-  } catch (error) {}
+  } catch (error) {
+    
+  }
 };
 module.exports = {
   createPost,
