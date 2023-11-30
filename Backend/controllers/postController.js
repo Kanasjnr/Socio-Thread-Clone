@@ -12,21 +12,22 @@ const createPost = async (req, res) => {
 
     const user = await User.findById(postedBy);
 
-    if(!user){
-        return res.status(404).json({ message: "User not found" });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
-    const maxLength = 500
+    const maxLength = 500;
 
-    if(text.length > maxLength){
-        return res.status(404).json({ message: `Text must be less than ${maxLength} characters` });
+    if (text.length > maxLength) {
+      return res
+        .status(404)
+        .json({ message: `Text must be less than ${maxLength} characters` });
     }
 
-    const newPost = new Post({postedBy, text, img})
-    await newPost.save()
+    const newPost = new Post({ postedBy, text, img });
+    await newPost.save();
   } catch (error) {
     res.status(500).json({ message: error.message });
-  console.log("Error in create post: ", error.message);
-
+    console.log("Error in create post: ", error.message);
   }
 };
 
