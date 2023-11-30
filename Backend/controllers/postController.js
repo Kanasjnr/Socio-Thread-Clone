@@ -17,9 +17,10 @@ const createPost = async (req, res) => {
     const maxLength = 500
 
     if(text.length > maxLength){
-        return res.status(404).json({ message: `Text must be less than ${maxLength}`})
+        return res.status(404).json({ message: `Text must be less than ${maxLength} characters` });
     }
 
+    const newPost = new post
   } catch (error) {
     res.status(500).json({ message: error.message });
   console.log("Error in create post: ", error.message);
