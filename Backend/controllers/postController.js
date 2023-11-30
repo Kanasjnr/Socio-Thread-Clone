@@ -1,6 +1,5 @@
 const User = require("../models/userModel");
 const Post = require("../models/postModel");
-const { post } = require("../routes/postRoutes");
 
 const createPost = async (req, res) => {
   try {
@@ -71,10 +70,39 @@ const deletePost = async (req, res) => {
   }
 };
 
-const likeUnlikePost = async (req, res) => {}
+const likeUnlikePost = async (req, res) => {
+  try {
+    const { id: postId } = req.params;
+    const userId = req.user._id;
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    const userLikedPost =post.likes.includes(userId);
+    if (userLikedPost) {
+      await Post.updateOne({ _id: postId }, { $pull: { likes: userId } });
+      res.status(200).json({ message: "Post unliked successfully" });
+    } else {
+      post.likes.push(userId)
+      await post.save();
+
+      res.status(200).json({ message: "Post liked successfully" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message }); // internal server error
+    console.log("Error in likeUnlikePost : ", error.message);
+  }
+};
+
+const replyPost = async (req, res) => {}
+
 module.exports = {
   createPost,
   getPost,
   deletePost,
-  likeUnlikePost
+  likeUnlikePost,
+  replyPost
 };
