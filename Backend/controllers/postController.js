@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const Post = require("../models/postModel");
+const { post } = require("../routes/postRoutes");
 
 const createPost = async (req, res) => {
   try {
@@ -81,12 +82,12 @@ const likeUnlikePost = async (req, res) => {
       return res.status(404).json({ message: "Post not found" });
     }
 
-    const userLikedPost =post.likes.includes(userId);
+    const userLikedPost = post.likes.includes(userId);
     if (userLikedPost) {
       await Post.updateOne({ _id: postId }, { $pull: { likes: userId } });
       res.status(200).json({ message: "Post unliked successfully" });
     } else {
-      post.likes.push(userId)
+      post.likes.push(userId);
       await post.save();
 
       res.status(200).json({ message: "Post liked successfully" });
@@ -97,12 +98,38 @@ const likeUnlikePost = async (req, res) => {
   }
 };
 
-const replyPost = async (req, res) => {}
+const replyToPost = async (req, res) => {
+  try {
+    const { text } = req.body;
+    const postId = req.params.id;
+    const userId = req.user._id;
+    const userProfilepic = req.user.userProfilepic;
+    const username = req.user.username;
+
+    if (!text) {
+      return res.status(400).json({ message: "text fiels is required" });
+    }
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ message: "post not found" });
+    }
+
+    const reply = { userId, text, userProfilepic, username };
+
+    post.replies.push(reply);
+    await Post.save();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log("Error in create post: ", error.message);
+  }
+};
 
 module.exports = {
   createPost,
   getPost,
   deletePost,
   likeUnlikePost,
-  replyPost
+  replyToPost,
 };
