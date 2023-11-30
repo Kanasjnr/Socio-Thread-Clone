@@ -149,7 +149,7 @@ const updateUser = async (req, res) => {
   const {name, email, password, username,profilePic,bio}= req.body
   const userId = req.user._id
   try {
-    
+      let user = await User.findById(userId)
   } catch (error) {
     res.status(500).json({ message: err.message }); //Internal server error
     console.log("Error in Update Usesr ", err.message);
