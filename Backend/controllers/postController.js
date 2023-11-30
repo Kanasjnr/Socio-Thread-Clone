@@ -1,8 +1,5 @@
-const createPost = async (req, res) => {
-
-}
-
+const createPost = async (req, res) => {};
 
 module.exports = {
-    createPost
-}
+  createPost,
+};
