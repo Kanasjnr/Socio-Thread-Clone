@@ -11,7 +11,9 @@ const createPost = async (req, res) => {
 
     const user = await User.findById(postedBy);
 
-    if(!user){}
+    if(!user){
+        return res.status(404).json({ message: "User not found" });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   console.log("Error in create post: ", error.message);
