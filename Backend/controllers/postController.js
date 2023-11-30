@@ -4,6 +4,7 @@ const Post = require("../models/postModel");
 const createPost = async (req, res) => {
   try {
     const { postedBy, text, img } = req.body;
+
     if (!postedBy || !text) {
       return res
         .status(400)
@@ -15,6 +16,7 @@ const createPost = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+    
     const maxLength = 500;
 
     if (text.length > maxLength) {
@@ -25,6 +27,7 @@ const createPost = async (req, res) => {
 
     const newPost = new Post({ postedBy, text, img });
     await newPost.save();
+
   } catch (error) {
     res.status(500).json({ message: error.message });
     console.log("Error in create post: ", error.message);
