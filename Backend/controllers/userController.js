@@ -141,37 +141,38 @@ const followUnfollowUser = async (req, res) => {
   }
 };
 const updateUser = async (req, res) => {
-
-  const {name, email, username, password, profilePic, bio} = req.body
-  const userId = req.user._id
+  const { name, email, username, password, profilePic, bio } = req.body;
+  const userId = req.user._id;
 
   try {
-      let user = await User.findById(userId)
-      if (!user) return res.status(400).json({message: "Usernot found"})
+    let user = await User.findById(userId);
+    if (!user) return res.status(400).json({ message: "Usernot found" });
 
-      if (password) {
-          const salt = await bcrypt.genSalt(10)
-          const hashedPassword = await bcrypt.hash(password, salt)
-          user.password = hashedPassword
-      }
+    if (req.params.id !== userId.toString())
+      return res
+        .status(400)
+        .json({ message: "You Cannot update other user's profile" });
 
-      user.name = name || user.name
-      user.email = email || user.email
-      user.username = username || user.username
-      user.profilePicture = profilePicture || user.profilePicture
-      user.bio = bio || user.bio
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      user.password = hashedPassword;
+    }
 
-      user = await user.save()
+    user.name = name || user.name;
+    user.email = email || user.email;
+    user.username = username || user.username;
+    user.profilePicture = profilePic || user.profilePicture;
+    user.bio = bio || user.bio;
 
-      res.status(200).json({message: "profile updated successfully", user})
-      
+    user = await user.save();
+
+    res.status(200).json({ message: "profile updated successfully", user });
   } catch (error) {
-      res.status(500).json({message: error.message})
-      console.log("Error in update User: ", error.message);
-      
+    res.status(500).json({ message: error.message });
+    console.log("Error in update User: ", error.message);
   }
-
-}
+};
 
 module.exports = {
   followUnfollowUser,
