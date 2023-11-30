@@ -1,7 +1,6 @@
 const User = require("../models/userModel");
 const Post = require("../models/postModel");
 
-
 const createPost = async (req, res) => {
   try {
     const { postedBy, text, img } = req.body;
@@ -36,8 +35,18 @@ const createPost = async (req, res) => {
   }
 };
 
-const getPost = async (req, res) => {}
+const getPost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).json({ message: "post not found" });
+    }
+
+    res.status(200).json({ post });
+  } catch (error) {}
+};
 module.exports = {
   createPost,
-  getPost
+  getPost,
 };
