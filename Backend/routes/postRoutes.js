@@ -8,4 +8,5 @@ router.get("/", getPost)
 router.post("/create",protectRoute, createPost)
 
 
+
 module.exports = router
