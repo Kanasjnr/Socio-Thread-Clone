@@ -18,10 +18,45 @@ import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useSetRecoilState } from "recoil";
 import authScreenAtom from "../atoms/authAtom";
+import userAtom from "../atoms/userAtom";
+import useShowToast from "../hooks/useShowToast";
 
 export default function SignupCard() {
   const [showPassword, setShowPassword] = useState(false);
-  const setAuthScreeen = useSetRecoilState(authScreenAtom)
+  const setAuthScreeen = useSetRecoilState(authScreenAtom);
+  const [inputs, setinputs] = useState({
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const showToast = useShowToast();
+  const setUser = useSetRecoilState(userAtom);
+
+  const handleSignUp = async () => {
+    try {
+      const res = await fetch("/api/users/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputs),
+      });
+
+      const data = await res.json();
+
+      if (data.error) {
+        showToast("Error", data.error, "error");
+        return;
+      }
+
+      localStorage.setItem("user-threads", JSON.stringify(data));
+      setUser(data);
+    } catch (error) {
+      showToast("Error", error, "error");
+    }
+  };
 
   return (
     <Flex align={"center"} justify={"center"}>
@@ -30,7 +65,6 @@ export default function SignupCard() {
           <Heading fontSize={"4xl"} textAlign={"center"}>
             Sign up
           </Heading>
-       
         </Stack>
         <Box
           rounded={"lg"}
@@ -41,26 +75,50 @@ export default function SignupCard() {
           <Stack spacing={4}>
             <HStack>
               <Box>
-                <FormControl id="firstName" isRequired>
-                  <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
+                <FormControl isRequired>
+                  <FormLabel>Full Name</FormLabel>
+                  <Input
+                    type="text"
+                    onChange={(e) =>
+                      setinputs({ ...inputs, name: e.target.value })
+                    }
+                    value={inputs.name}
+                  />
                 </FormControl>
               </Box>
               <Box>
-                <FormControl id="lastName">
-                  <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
+                <FormControl isRequired>
+                  <FormLabel>Username</FormLabel>
+                  <Input
+                    type="text"
+                    onChange={(e) =>
+                      setinputs({ ...inputs, username: e.target.value })
+                    }
+                    value={inputs.username}
+                  />
                 </FormControl>
               </Box>
             </HStack>
-            <FormControl id="email" isRequired>
+            <FormControl isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input
+                type="email"
+                onChange={(e) =>
+                  setinputs({ ...inputs, email: e.target.value })
+                }
+                value={inputs.email}
+              />
             </FormControl>
-            <FormControl id="password" isRequired>
+            <FormControl isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? "text" : "password"} />
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  onChange={(e) =>
+                    setinputs({ ...inputs, password: e.target.value })
+                  }
+                  value={inputs.password}
+                />
                 <InputRightElement h={"full"}>
                   <Button
                     variant={"ghost"}
@@ -80,15 +138,22 @@ export default function SignupCard() {
                 bg={useColorModeValue("gray.600", "gray.700")}
                 color={"white"}
                 _hover={{
-                  bg: useColorModeValue("gray.700", "gray.800")
+                  bg: useColorModeValue("gray.700", "gray.800"),
                 }}
+                onClick={handleSignUp}
               >
                 Sign up
               </Button>
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>
-                Already a user?<Link color={"blue.400"} onClick={() => setAuthScreeen("login")}>Login</Link>
+                Already a user?
+                <Link
+                  color={"blue.400"}
+                  onClick={() => setAuthScreeen("login")}
+                >
+                  Login
+                </Link>
               </Text>
             </Stack>
           </Stack>
