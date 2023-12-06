@@ -166,6 +166,9 @@ const updateUser = async (req, res) => {
     }
 
     if(profilePic){
+      if(user.profilePic){
+        await cloudinary.uploader.destroy(user.profilePic.split("/").pop().split(".") [0])
+      }
       const uploadResponse = await cloudinary.uploader.upload(profilePic)
       profilePic = uploadResponse.secure_url
     }
@@ -178,7 +181,9 @@ const updateUser = async (req, res) => {
 
     user = await user.save();
 
-    res.status(200).json({ mesage: "Profile updated successfully", user });
+    user.password  = null
+
+    res.status(200).json({user });
   } catch (error) {
     res.status(500).json({ error: error.message });
     console.log("Error in update User: ", error.message);

@@ -1,7 +1,24 @@
+import { useEffect, useState } from "react";
 import UserHeader from "../components/UserHeader";
 import UserPosts from "../components/UserPosts";
+import { useParams } from "react-router-dom";
 
 const UserPage = () => {
+  const [user, setUser]= useState(null)
+  const {username} = useParams()
+
+  useEffect(() =>{
+const getUser = async () =>{
+    try {
+        const res = await fetch (`/api/users/profile/${username}`)
+        const data = await res.json()
+
+        console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+}
+  },[username])
   return (
     <>
       <UserHeader />
