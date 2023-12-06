@@ -1,14 +1,23 @@
 import { Box, Flex, Text, VStack, Link } from "@chakra-ui/layout";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
 import { Portal } from "@chakra-ui/portal";
-import { Avatar } from "@chakra-ui/react";
+import { Avatar, Button } from "@chakra-ui/react";
 import { BsInstagram } from "react-icons/bs";
 import { CgMoreO } from "react-icons/cg";
 import { useToast } from "@chakra-ui/toast";
+import { useRecoilValue } from "recoil";
+import userAtom from "../atoms/userAtom";
+import { Link as RouterLink } from "react-router-dom";
+import { useState } from "react";
+import useShowToast from "../hooks/useShowToast";
 
-const UserHeader = ({user}) => {
+const UserHeader = ({ user }) => {
   const toast = useToast();
-
+  const currentUser = useRecoilValue(userAtom);
+  const [following, setFollowing] = useState(
+    user.followers.includes(currentUser._id)
+  );
+  const showToast = useShowToast();
   const copyURL = () => {
     const currentURL = window.location.href;
     navigator.clipboard.writeText(currentURL).then(() => {
@@ -22,6 +31,26 @@ const UserHeader = ({user}) => {
     });
   };
 
+  const handleFollowUnfollow = async () => {
+    try {
+      const res = await fetch(`/api/users/follow/${user._id}`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+
+      const data = await res.json()
+     if(data.error){
+      showToast("Error", data.error, "error")
+      return
+     }
+     setFollowing(!following)
+     console.log(data);
+    } catch (error) {
+      showToast("Error", error, "error");
+    }
+  };
   return (
     <VStack gap={4} alignItems={"start"}>
       <Flex justifyContent={"space-between"} w={"full"}>
@@ -45,25 +74,39 @@ const UserHeader = ({user}) => {
         <Box>
           {user.profilePic && (
             <Avatar
-            name={user.name}
-            src={user.profilePic}
-            size={{ base: "md", md: "xl" }}
-          />
+              name={user.name}
+              src={user.profilePic}
+              size={{ base: "md", md: "xl" }}
+            />
           )}
           {!user.profilePic && (
             <Avatar
-            name={user.name}
-            src="https://bit.ly/broken-link"
-            size={{ base: "md", md: "xl" }}
-          />
+              name={user.name}
+              src="https://tinyurl.com/ycxvd3we"
+              size={{ base: "md", md: "xl" }}
+            />
           )}
-          
         </Box>
       </Flex>
+      {currentUser._id === user._id && (
+        <Link as={RouterLink} to="/update">
+          <Button size={"sm"}>Update Profile</Button>
+        </Link>
+      )}
+
+      {currentUser._id !== user._id && (
+        <Link as={RouterLink}>
+          <Button size={"sm"} onClick={handleFollowUnfollow}>
+            {following ? "unFollow" : "Follow"}{" "}
+          </Button>
+        </Link>
+      )}
+
       <Text>{user.bio}</Text>
+
       <Flex w={"full"} justifyContent={"space-between"}>
         <Flex gap={2} alignItems={"center"}>
-          <Text color={"gray.light"}>3.2k followers</Text>
+          <Text color={"gray.light"}>{user.followers.length} follower</Text>
           <Box w={1} h={1} bg={"gray.light"} borderRadius={"50%"}></Box>
           <Link color={"gray.light"}>instagram.com</Link>
         </Flex>

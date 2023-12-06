@@ -2,35 +2,43 @@ import { useEffect, useState } from "react";
 import UserHeader from "../components/UserHeader";
 import UserPosts from "../components/UserPosts";
 import { useParams } from "react-router-dom";
+import useShowToast from "../hooks/useShowToast";
 
 const UserPage = () => {
-  const [user, setUser]= useState(null)
-  const {username} = useParams()
+  const [user, setUser] = useState(null);
+  const { username } = useParams();
+  const showToast = useShowToast()
 
-  useEffect(() =>{
-const getUser = async () =>{
-    try {
-        const res = await fetch (`/api/users/profile/${username}`)
-        const data = await res.json()
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await fetch(`/api/users/profile/${username}`);
+        const data = await res.json();
 
-        console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-}
-  },[username])
+        if(data.error) {
+          showToast("Error", data.error, "error");
+          return
+        }
+        setUser(data)
+      } catch (error) {
+        showToast("Error", error, "error");
+      }
+    };
+    getUser()
+  }, [username,showToast]);
+  if(!user) return null;
   return (
     <>
-      <UserHeader />
+      <UserHeader  user={user}/>
       <UserPosts
-      likes={10}
-       replies={50}
+        likes={10}
+        replies={50}
         postImg={"/post1.png"}
         postTitle={"Helloo"}
       />
       <UserPosts
-       likes={3000}
-       replies={500}
+        likes={3000}
+        replies={500}
         postImg={""}
         postTitle={"This Is Great"}
       />
@@ -40,8 +48,6 @@ const getUser = async () =>{
         postImg={"/post3.png"}
         postTitle={"Wow!"}
       />
-    
-   
     </>
   );
 };
