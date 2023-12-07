@@ -36,15 +36,20 @@ const CreatePost = () => {
           <ModalCloseButton />
           <ModalBody padding={6}>
             <FormControl>
-             
               <Textarea
                 placeholder="post Content goes here"
                 onChange={handleTextChange}
                 value={postText}
               />
-             <Text fontSize="xs" fontWeight="bold" textAlign={"right"} margin={1} color={"gray.800"}>
+              <Text
+                fontSize="xs"
+                fontWeight="bold"
+                textAlign={"right"}
+                margin={1}
+                color={"gray.800"}
+              >
                 500/500
-             </Text>
+              </Text>
             </FormControl>
           </ModalBody>
 
