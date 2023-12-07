@@ -9,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -41,7 +42,9 @@ const CreatePost = () => {
                 onChange={handleTextChange}
                 value={postText}
               />
-              Text
+             <Text>
+                500/500
+             </Text>
             </FormControl>
           </ModalBody>
 
