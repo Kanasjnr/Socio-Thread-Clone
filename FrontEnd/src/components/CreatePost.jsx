@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import usePreviwImg from "../hooks/usePreviewImg";
+import {BsFillImageFill} from "react-icons/bs"
 
 const CreatePost = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
