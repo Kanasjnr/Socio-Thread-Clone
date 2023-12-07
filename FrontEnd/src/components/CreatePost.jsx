@@ -1,6 +1,7 @@
 import { AddIcon } from "@chakra-ui/icons";
 import {
   Button,
+  FormControl,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -8,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
 
@@ -31,8 +33,10 @@ const CreatePost = () => {
         <ModalContent>
           <ModalHeader>Create Post</ModalHeader>
           <ModalCloseButton />
-          <ModalBody padding={6}>hello</ModalBody>
-
+          <ModalBody padding={6}>
+            <FormControl></FormControl>
+          </ModalBody>
+          <Textarea></Textarea>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
@@ -44,4 +48,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost
+export default CreatePost;
