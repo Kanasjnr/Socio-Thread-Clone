@@ -22,7 +22,7 @@ const usePreviwImg = () => {
     }
   };
   console.log(imgUrl);
-  return { handleImageChange, imgUrl };
+  return { handleImageChange, imgUrl, setImgUrl };
 };
 
 export default usePreviwImg;

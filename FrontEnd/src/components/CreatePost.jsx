@@ -21,13 +21,29 @@ import { useRef, useState } from "react";
 import usePreviwImg from "../hooks/usePreviewImg";
 import { BsFillImageFill } from "react-icons/bs";
 
+const MAX_CHAR = 500;
+
 const CreatePost = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [postText, setPostText] = useState("");
   const { handleImageChange, imgUrl, setImgUrl } = usePreviwImg();
+  const [loading, setLoading] = useState(false);
   const imageRef = useRef(null);
-  const handleTextChange = () => {};
 
+  const [remainingChar, setremainingChar] = useState(MAX_CHAR);
+  const handleTextChange = (e) => {
+    const inputText = e.target.value;
+    if (inputText.length > MAX_CHAR) {
+      const truncatedText = inputText.style(0, MAX_CHAR);
+      setremainingChar(0);
+    } else {
+      setPostText(inputText);
+      setremainingChar(MAX_CHAR - inputText.length);
+    }
+  };
+  const handleCreatePost = async () => {
+    setLoading(true);
+  };
   return (
     <>
       <Button
@@ -60,7 +76,7 @@ const CreatePost = () => {
                 margin={1}
                 color={"gray.800"}
               >
-                500/500
+                {remainingChar}/{MAX_CHAR}
               </Text>
               <Input
                 type="file"
@@ -77,18 +93,26 @@ const CreatePost = () => {
             </FormControl>
             {imgUrl && (
               <Flex mt={"full"} position={"relative"}>
-                 <Image src={imgUrl} alt="select image"/>
-                 <CloseButton onClick={() => setImgUrl("")}
+                <Image src={imgUrl} alt="select image" />
+                <CloseButton
+                  onClick={() => setImgUrl("")}
                   right={2}
-                   top={2} 
-                   pos={"absolute"} bg={"gray.800"}/>
+                  top={2}
+                  pos={"absolute"}
+                  bg={"gray.800"}
+                />
               </Flex>
             )}
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={handleCreatePost}
+              isLoading={loading}
+            >
+              Post
             </Button>
           </ModalFooter>
         </ModalContent>
