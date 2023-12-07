@@ -13,9 +13,16 @@ import {
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useState } from "react";
 
 const CreatePost = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [postText, setPostText] = useState("")
+  const handleTextChange = () =>{
+
+  }
+
+
   return (
     <>
       <Button
