@@ -20,6 +20,11 @@ import {
 import { useRef, useState } from "react";
 import usePreviwImg from "../hooks/usePreviewImg";
 import { BsFillImageFill } from "react-icons/bs";
+import { useRecoilValue } from "recoil";
+import userAtom from "../atoms/userAtom";
+import useShowToast from "../hooks/useShowToast";
+import { useParams } from "react-router-dom";
+import postAtom from "../atoms/postAtom";
 
 const MAX_CHAR = 500;
 
@@ -28,13 +33,18 @@ const CreatePost = () => {
   const [postText, setPostText] = useState("");
   const { handleImageChange, imgUrl, setImgUrl } = usePreviwImg();
   const [loading, setLoading] = useState(false);
+  const user = useRecoilValue(userAtom);
   const imageRef = useRef(null);
+  const showToast = useShowToast()
+  const username = useParams()
+  const [posts, setPosts] = useRecoilValue(postAtom)
 
   const [remainingChar, setremainingChar] = useState(MAX_CHAR);
   const handleTextChange = (e) => {
     const inputText = e.target.value;
     if (inputText.length > MAX_CHAR) {
       const truncatedText = inputText.style(0, MAX_CHAR);
+      setPostText(truncatedText);
       setremainingChar(0);
     } else {
       setPostText(inputText);
@@ -43,6 +53,34 @@ const CreatePost = () => {
   };
   const handleCreatePost = async () => {
     setLoading(true);
+    try {
+      const res = await fetch("/api/post/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          postedBy: user._id,
+          text: postText,
+          img: imgUrl,
+        }),
+      });
+      const data = await res.json();
+      if (data.error) {
+        showToast("Error", data.error, "error");
+        return;
+      }
+      showToast("Success", "post created sucessfully", "success");
+
+      if (username === user.username) {
+        setPosts({ data, ...posts });
+      }
+      onClose();
+    } catch (error) {
+        showToast("Error", error, "error");
+    }finally{
+       setLoading(false)
+    }
   };
   return (
     <>
