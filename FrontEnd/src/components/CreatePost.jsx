@@ -35,9 +35,9 @@ const CreatePost = () => {
   const [loading, setLoading] = useState(false);
   const user = useRecoilValue(userAtom);
   const imageRef = useRef(null);
-  const showToast = useShowToast()
-  const username = useParams()
-  const [posts, setPosts] = useRecoilValue(postAtom)
+  const showToast = useShowToast();
+  const username = useParams();
+  const [posts, setPosts] = useRecoilValue(postAtom);
 
   const [remainingChar, setremainingChar] = useState(MAX_CHAR);
   const handleTextChange = (e) => {
@@ -54,7 +54,7 @@ const CreatePost = () => {
   const handleCreatePost = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/post/create", {
+      const res = await fetch("/api/posts/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,9 +77,9 @@ const CreatePost = () => {
       }
       onClose();
     } catch (error) {
-        showToast("Error", error, "error");
-    }finally{
-       setLoading(false)
+      showToast("Error", error, "error");
+    } finally {
+      setLoading(false);
     }
   };
   return (
