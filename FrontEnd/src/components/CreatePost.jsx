@@ -42,7 +42,7 @@ const CreatePost = () => {
                 onChange={handleTextChange}
                 value={postText}
               />
-             <Text fontSize="xs" fontWeight="bold" textAlign={"right"} margin={1}>
+             <Text fontSize="xs" fontWeight="bold" textAlign={"right"} margin={1} color={"gray.800"}>
                 500/500
              </Text>
             </FormControl>
