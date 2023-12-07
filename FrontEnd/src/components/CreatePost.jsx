@@ -2,6 +2,7 @@ import { AddIcon } from "@chakra-ui/icons";
 import {
   Button,
   FormControl,
+  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -13,18 +14,16 @@ import {
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import usePreviwImg from "../hooks/usePreviewImg";
-import {BsFillImageFill} from "react-icons/bs"
+import { BsFillImageFill } from "react-icons/bs";
 
 const CreatePost = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [postText, setPostText] = useState("")
-  const {handleImageChange, imgUrl} = usePreviwImg()
-  const handleTextChange = () =>{
-
-  }
-
+  const [postText, setPostText] = useState("");
+  const { handleImageChange, imgUrl } = usePreviwImg();
+  const imageRef = useRef(null);
+  const handleTextChange = () => {};
 
   return (
     <>
@@ -60,7 +59,18 @@ const CreatePost = () => {
               >
                 500/500
               </Text>
-              <input type="file" hidden ref={imageRef} onChange={handleImageChange}/>
+              <Input
+                type="file"
+                hidden
+                ref={imageRef}
+                onChange={handleImageChange}
+              />
+
+              <BsFillImageFill
+                style={{ marginLeft: "5px", cursor: "pointer" }}
+                size={16}
+                onClick={() => imageRef.current.click()}
+              />
             </FormControl>
           </ModalBody>
 
