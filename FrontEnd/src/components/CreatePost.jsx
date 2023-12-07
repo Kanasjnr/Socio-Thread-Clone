@@ -34,9 +34,17 @@ const CreatePost = () => {
           <ModalHeader>Create Post</ModalHeader>
           <ModalCloseButton />
           <ModalBody padding={6}>
-            <FormControl></FormControl>
+            <FormControl>
+             
+              <Textarea
+                placeholder="post Content goes here"
+                onChange={handleTextChange}
+                value={postText}
+              />
+              Text
+            </FormControl>
           </ModalBody>
-          <Textarea placeholder="post Content goes here" onChange={handleTextChange} value={postText}/>
+
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
