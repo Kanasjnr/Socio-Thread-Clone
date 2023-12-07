@@ -1,7 +1,14 @@
 import { Flex, Image, useColorMode,Link } from "@chakra-ui/react";
+import { useRecoilValue } from "recoil";
+import userAtom from "../atoms/userAtom";
+import {AiFillHome} from "react-icons/ai"
+import {Link as RouterLink} from "react-router-dom"
+
+
 
 const Header = () => {
    const { colorMode, toggleColorMode } = useColorMode();
+   const user = useRecoilValue(userAtom)
 
    return (
       <Flex justifyContent={"center"} mt={6} mb="12">
