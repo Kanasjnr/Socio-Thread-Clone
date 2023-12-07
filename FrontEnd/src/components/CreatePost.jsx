@@ -1,7 +1,10 @@
 import { AddIcon } from "@chakra-ui/icons";
 import {
   Button,
+  CloseButton,
+  Flex,
   FormControl,
+  Image,
   Input,
   Modal,
   ModalBody,
@@ -72,6 +75,12 @@ const CreatePost = () => {
                 onClick={() => imageRef.current.click()}
               />
             </FormControl>
+            {imgUrl && (
+              <Flex mt={"full"} position={"relative"}>
+                 <Image src={imgUrl} alt="select image"/>
+                 <CloseButton/>
+              </Flex>
+            )}
           </ModalBody>
 
           <ModalFooter>
