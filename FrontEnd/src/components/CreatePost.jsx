@@ -31,7 +31,7 @@ const CreatePost = () => {
         <ModalContent>
           <ModalHeader>Create Post</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>hello</ModalBody>
+          <ModalBody padding={6}>hello</ModalBody>
 
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
