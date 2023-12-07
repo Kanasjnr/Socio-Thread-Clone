@@ -13,8 +13,10 @@ const Header = () => {
    return (
       <Flex justifyContent={"center"} mt={6} mb="12">
          {user && (
-            <Link as={{RouterLink}} to="/" />
-            <AiFillHome size={24}/>
+            <Link as={{RouterLink}} to="/" >
+               <AiFillHome size={24}/>
+            </Link>
+            
          )}
          <Image
             cursor="pointer"
