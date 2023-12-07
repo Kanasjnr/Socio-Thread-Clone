@@ -12,6 +12,9 @@ const Header = () => {
 
    return (
       <Flex justifyContent={"center"} mt={6} mb="12">
+         {user && (
+            <Link as={{RouterLink}}
+         )}
          <Image
             cursor="pointer"
             alt="logo"
