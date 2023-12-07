@@ -18,6 +18,8 @@ const UserHeader = ({ user }) => {
     user.followers.includes(currentUser._id)
   );
   const showToast = useShowToast();
+  const [updating, setUpdating] = useState(false);
+
   const copyURL = () => {
     const currentURL = window.location.href;
     navigator.clipboard.writeText(currentURL).then(() => {
@@ -32,6 +34,13 @@ const UserHeader = ({ user }) => {
   };
 
   const handleFollowUnfollow = async () => {
+    if (!currentUser) {
+      showToast("Error", "Please login to follow", "error");
+      return;
+    }
+
+    if (updating) return;
+    setUpdating(true);
     try {
       const res = await fetch(`/api/users/follow/${user._id}`, {
         method: "POST",
@@ -40,15 +49,24 @@ const UserHeader = ({ user }) => {
         },
       });
 
-      const data = await res.json()
-     if(data.error){
-      showToast("Error", data.error, "error")
-      return
-     }
-     setFollowing(!following)
-     console.log(data);
+      const data = await res.json();
+      if (data.error) {
+        showToast("Error", data.error, "error");
+        return;
+      }
+      if (following) {
+        showToast("Success", `unfollowed ${user.name}`, "success");
+        user.followers.pop();
+      } else {
+        showToast("Success", `followed ${user.name}`, "success");
+        user.followers.push(currentUser._id);
+      }
+      setFollowing(!following);
+      console.log(data);
     } catch (error) {
       showToast("Error", error, "error");
+    } finally {
+      setUpdating(false);
     }
   };
   return (
@@ -96,8 +114,12 @@ const UserHeader = ({ user }) => {
 
       {currentUser._id !== user._id && (
         <Link as={RouterLink}>
-          <Button size={"sm"} onClick={handleFollowUnfollow}>
-            {following ? "unFollow" : "Follow"}{" "}
+          <Button
+            size={"sm"}
+            onClick={handleFollowUnfollow}
+            isLoading={updating}
+          >
+            {following ? "unFollow" : "Follow"}
           </Button>
         </Link>
       )}
