@@ -3,12 +3,13 @@ import UserHeader from "../components/UserHeader";
 import UserPosts from "../components/UserPosts";
 import { useParams } from "react-router-dom";
 import useShowToast from "../hooks/useShowToast";
+import { Flex, Spinner } from "@chakra-ui/react";
 
 const UserPage = () => {
   const [user, setUser] = useState(null);
   const { username } = useParams();
-  const showToast = useShowToast()
-  const [loading,setLoading] = useState(true)
+  const showToast = useShowToast();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getUser = async () => {
@@ -16,25 +17,31 @@ const UserPage = () => {
         const res = await fetch(`/api/users/profile/${username}`);
         const data = await res.json();
 
-        if(data.error) {
+        if (data.error) {
           showToast("Error", data.error, "error");
-          return
+          return;
         }
-        setUser(data)
+        setUser(data);
       } catch (error) {
         showToast("Error", error, "error");
-      }finally{
-        setLoading(false)
+      } finally {
+        setLoading(false);
       }
     };
-    getUser()
-  }, [username,showToast]);
+    getUser();
+  }, [username, showToast]);
 
-  if(!user && loading) return null;
-  
+  if (!user && loading) {
+    return (
+      <Flex justifyContent={"center"}>
+        <Spinner size={"xl"} />
+      </Flex>
+    );
+  }
+
   return (
     <>
-      <UserHeader  user={user}/>
+      <UserHeader user={user} />
       <UserPosts
         likes={10}
         replies={50}
