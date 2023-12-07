@@ -42,7 +42,7 @@ const CreatePost = () => {
                 onChange={handleTextChange}
                 value={postText}
               />
-             <Text>
+             <Text fontSize="xs" fontWeight={"bold"}>
                 500/500
              </Text>
             </FormControl>
