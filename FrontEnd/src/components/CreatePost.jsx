@@ -78,7 +78,11 @@ const CreatePost = () => {
             {imgUrl && (
               <Flex mt={"full"} position={"relative"}>
                  <Image src={imgUrl} alt="select image"/>
-                 <CloseButton onClick={() => setImgUrl("")} right={2} top={2} pos={"absolute"} bg={{"gray.800"}}/>
+                 <CloseButton onClick={() => setImgUrl("")}
+                  right={2}
+                   top={2} 
+                   pos={"absolute"} 
+                   bg={"gray.800"}/>
               </Flex>
             )}
           </ModalBody>
