@@ -18,6 +18,10 @@ const Header = () => {
             </Link>
             
          )}
+
+         {!user && (
+            
+         )}
          <Image
             cursor="pointer"
             alt="logo"
