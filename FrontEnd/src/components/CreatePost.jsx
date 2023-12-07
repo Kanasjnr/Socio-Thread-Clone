@@ -14,10 +14,12 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import usePreviwImg from "../hooks/usePreviewImg";
 
 const CreatePost = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [postText, setPostText] = useState("")
+  const {handleImageChange, imgUrl} = usePreviwImg()
   const handleTextChange = () =>{
 
   }
