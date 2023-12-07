@@ -24,7 +24,7 @@ import { BsFillImageFill } from "react-icons/bs";
 const CreatePost = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [postText, setPostText] = useState("");
-  const { handleImageChange, imgUrl } = usePreviwImg();
+  const { handleImageChange, imgUrl, setImgUrl } = usePreviwImg();
   const imageRef = useRef(null);
   const handleTextChange = () => {};
 
@@ -81,8 +81,7 @@ const CreatePost = () => {
                  <CloseButton onClick={() => setImgUrl("")}
                   right={2}
                    top={2} 
-                   pos={"absolute"} 
-                   bg={"gray.800"}/>
+                   pos={"absolute"} bg={"gray.800"}/>
               </Flex>
             )}
           </ModalBody>
