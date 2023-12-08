@@ -42,6 +42,8 @@ const Post = ({ post, postedBy }) => {
     };
     getUser();
   }, [postedBy, showToast]);
+  
+  if(!user)
 
   return (
     <Link to={"/aliumusa/post/1"}>
