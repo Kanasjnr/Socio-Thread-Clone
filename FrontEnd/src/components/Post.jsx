@@ -51,34 +51,41 @@ const Post = ({ post, postedBy }) => {
           <Avatar src={user.profilePic} name={`${user.name} ${user.username}`} size={"md"} />
           <Box w={"1px"} h={"full"} bg={"gray.light"} my={2}></Box>
           <Box pos={"relative"} w={"full"}>
-            {}
-            <Avatar
-              src="/post1.png"
-              name="Wale Adenuga"
-              size={"xs"}
-              pos={"absolute"}
-              top={"0"}
-              left={"15px"}
-              padding={"2px"}
-            />
-            <Avatar
-              src="/post1.png"
-              name="Ade Kunle"
-              size={"xs"}
-              pos={"absolute"}
-              bottom={"0"}
-              right={"-5px"}
-              padding={"2px"}
-            />
-            <Avatar
-              src="/post1.png"
-              name="Wole Soyinka"
-              size={"xs"}
-              pos={"absolute"}
-              bottom={"0"}
-              left={"4px"}
-              padding={"2px"}
-            />
+            {post.replies.length === 0 && <Text textAlign={"center"}>😒</Text>}
+            {post.replies[0] && (
+                 <Avatar
+                 src={post.replies[0].userProfilePic}
+                 name={post.replies[0].username}
+                 size={"xs"}
+                 pos={"absolute"}
+                 top={"0"}
+                 left={"15px"}
+                 padding={"2px"}
+               />
+            )}
+           {post.replies[1] && (
+                 <Avatar
+                 src={post.replies[1].userProfilePic}
+                 name={post.replies[1].username}
+                 size={"xs"}
+                 pos={"absolute"}
+                 bottom={"0"}
+                 right={"-5px"}
+                 padding={"2px"}
+               />
+           )}
+           {post.replies[2] && (
+                <Avatar
+                src={post.replies[2].userProfilePic}
+                name={post.replies[2].username}
+                size={"xs"}
+                pos={"absolute"}
+                bottom={"0"}
+                left={"4px"}
+                padding={"2px"}
+              />
+           )}
+            
           </Box>
         </Flex>
 
@@ -137,9 +144,9 @@ const Post = ({ post, postedBy }) => {
             fontSize={"sm"}
             alignItems={"center"}
           >
-            <Text>{post.replies} replies</Text>
+            <Text>{post.replies.length} replies</Text>
             <Box w={0.5} h={0.5} bg={"gray.light"} borderRadius={"full"}></Box>
-            <Text>{post.likes} likes</Text>
+            <Text>{post.likes.length} likes</Text>
           </Flex>
         </Flex>
       </Flex>
