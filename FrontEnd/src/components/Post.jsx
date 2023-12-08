@@ -37,14 +37,12 @@ const Post = ({ post, postedBy }) => {
       } catch (err) {
         showToast("Error", err.message, "error");
         setUser(null);
-      } 
-        
-   
+      }
     };
     getUser();
   }, [postedBy, showToast]);
-  
-  if(!user) return null
+
+  if (!user) return null;
 
   return (
     <Link to={"/aliumusa/post/1"}>
