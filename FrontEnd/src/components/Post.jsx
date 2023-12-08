@@ -48,9 +48,10 @@ const Post = ({ post, postedBy }) => {
     <Link to={"/aliumusa/post/1"}>
       <Flex gap={3} mb={4} py={5}>
         <Flex flexDir={"column"} alignItems={"center"}>
-          <Avatar src="/post1.png" name="Mark Zuckerberg" size={"md"} />
+          <Avatar src={user.profilePic} name={`${user.name} ${user.username}`} size={"md"} />
           <Box w={"1px"} h={"full"} bg={"gray.light"} my={2}></Box>
           <Box pos={"relative"} w={"full"}>
+            {}
             <Avatar
               src="/post1.png"
               name="Wale Adenuga"
