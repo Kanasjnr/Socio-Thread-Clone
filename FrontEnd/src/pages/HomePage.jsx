@@ -15,13 +15,13 @@ const HomePage = () => {
       try {
         const res = await fetch("/api/posts/feed");
         const data = await res.json();
-        
+
         if (data.error) {
           showToast("Error", data.error, "error");
           return;
         }
         console.log(data);
-        setPosts(data)
+        setPosts(data);
       } catch (err) {
         showToast("Error", err.message, "error");
       } finally {
@@ -40,7 +40,10 @@ const HomePage = () => {
           <Spinner size={"xl"} />
         </Flex>
       )}
-        {posts.map(post => <Post/>)}
+
+      {posts.map((post) => (
+        <Post key={post._id} post={post} postedBy={post.postedBy} />
+      ))}
     </>
   );
 };
