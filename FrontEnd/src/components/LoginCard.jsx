@@ -22,7 +22,7 @@ import useShowToast from "../hooks/useShowToast";
 import userAtom from "../atoms/userAtom";
 
 export default function LoginCard() {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const setAuthScreeen = useSetRecoilState(authScreenAtom);
   const setUser = useSetRecoilState(userAtom);
@@ -34,7 +34,7 @@ export default function LoginCard() {
   const showToast = useShowToast();
 
   const handleLogin = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const res = await fetch("api/users/login", {
         method: "POST",
@@ -45,7 +45,6 @@ export default function LoginCard() {
       });
 
       const data = await res.json();
-      
 
       if (data.error) {
         showToast("Error", data.error, "error");
@@ -55,8 +54,8 @@ export default function LoginCard() {
       setUser(data);
     } catch (error) {
       showToast("Error", error, "error");
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
