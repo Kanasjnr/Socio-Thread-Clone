@@ -60,8 +60,9 @@ const UserPage = () => {
 
   return (
     <>
-      {/* <UserHeader user={user} />
-      <UserPosts
+       <UserHeader user={user} />
+       
+      {/* <UserPosts
         likes={10}
         replies={50}
         postImg={"/post1.png"}
@@ -78,7 +79,7 @@ const UserPage = () => {
         replies={2}
         postImg={"/post3.png"}
         postTitle={"Wow!"}
-      /> */}
+      />  */}
     </>
   );
 };
