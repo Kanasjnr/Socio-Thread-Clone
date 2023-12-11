@@ -17,13 +17,17 @@ import Actions from "./Actions";
 import { useEffect, useState } from "react";
 import useShowToast from "../hooks/useShowToast";
 import { formatDistanceToNow } from "date-fns";
-import {DeleteIcon} from "@chakra-ui/icons"
+import { DeleteIcon } from "@chakra-ui/icons";
+import { useRecoilValue } from "recoil";
+import userAtom from "../atoms/userAtom";
 
 const Post = ({ post, postedBy }) => {
   const [liked, setLiked] = useState(false);
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+
   const showToast = useShowToast();
+  const navigate = useNavigate();
+  const currentUser = useRecoilValue(userAtom);
 
   useEffect(() => {
     const getUser = async () => {
@@ -45,6 +49,20 @@ const Post = ({ post, postedBy }) => {
   }, [postedBy, showToast]);
 
   if (!user) return null;
+
+  const handleDeletePost = async (e) => {
+    try {
+      e.preventDefault();
+      if (!window.confirm("Are you sure you want to delete this post ?"))
+        return;
+      const res = await fetch(`/api/posts/${post._id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+    } catch (error) {
+      showToast("Error", error.message, "error");
+    }
+  };
 
   return (
     <Link to={`/${user.username}/post/${post._id}`}>
@@ -120,7 +138,9 @@ const Post = ({ post, postedBy }) => {
                 3 days ago
               </Text>
               {/* <Text> {formatDistanceToNow(new Date(post.createdAt))} ago </Text>  */}
-                {currentUser?._id === user._id && <DeleteIcon size={20} onClick={handleDelete}/>}
+              {currentUser?._id === user._id && (
+                <DeleteIcon size={20} onClick={handleDeletePost} />
+              )}
               {/* <Menu>
                 <MenuButton>
                   <BsThreeDots cursor={"pointer"} />
