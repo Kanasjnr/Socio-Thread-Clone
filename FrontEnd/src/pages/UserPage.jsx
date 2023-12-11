@@ -10,8 +10,8 @@ const UserPage = () => {
   const { username } = useParams();
   const showToast = useShowToast();
   const [loading, setLoading] = useState(true);
-  const [posts,setPosts] = useState([])
-  const [fetchingPosts,setFetchingPosts] = useState(false)
+  const [posts, setPosts] = useState([]);
+  const [fetchingPosts, setFetchingPosts] = useState(false);
 
   useEffect(() => {
     const getUser = async () => {
@@ -32,22 +32,22 @@ const UserPage = () => {
     };
 
     const getPosts = async () => {
-      setFetchingPosts(true); 
+      setFetchingPosts(true);
       try {
         const res = await fetch(`/api/posts/user/${username}`);
         const data = await res.json();
         console.log(data);
-        setPosts(data)
+        setPosts(data);
       } catch (error) {
         showToast("Error", error.message, "error");
         setPosts([]);
-      }finally{
-        setFetchingPosts(false); 
+      } finally {
+        setFetchingPosts(false);
       }
     };
 
     getUser();
-    getPosts()
+    getPosts();
   }, [username, showToast]);
 
   if (!user && loading) {
@@ -60,12 +60,17 @@ const UserPage = () => {
 
   return (
     <>
-       <UserHeader user={user} />
-       {!fetchingPosts && posts.length === 0 && <h1> User has no posts</h1>}
-       {fetchingPosts && (<Flex justifyContent={"center"} my={12}>
-        <Spinner size={"xl"}/>
-       </Flex>)
-       }
+      <UserHeader user={user} />
+      {!fetchingPosts && posts.length === 0 && <h1> User has no posts</h1>}
+      {fetchingPosts && (
+        <Flex justifyContent={"center"} my={12}>
+          <Spinner size={"xl"} />
+        </Flex>
+      )}
+
+      {posts.map((post) => (
+        <post key={post._id} post={post} postedBy={post.postedBy} />
+      ))}
       {/* <UserPosts
         likes={10}
         replies={50}
