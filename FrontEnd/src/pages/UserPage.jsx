@@ -32,6 +32,7 @@ const UserPage = () => {
     };
 
     const getPosts = async () => {
+      setFetchingPosts(true); 
       try {
         const res = await fetch(`/api/posts/user/${username}`);
         const data = await res.json();
@@ -39,10 +40,14 @@ const UserPage = () => {
         setPosts(data)
       } catch (error) {
         showToast("Error", error.message, "error");
+        setPosts([]);
+      }finally{
+        setFetchingPosts(false); 
       }
     };
 
     getUser();
+    getPosts()
   }, [username, showToast]);
 
   if (!user && loading) {
