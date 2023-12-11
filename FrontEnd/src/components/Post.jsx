@@ -155,8 +155,6 @@ const Post = ({ post, postedBy }) => {
           <Flex>
             <Actions liked={liked} setLiked={setLiked} />
           </Flex>
-
-
         </Flex>
       </Flex>
     </Link>
