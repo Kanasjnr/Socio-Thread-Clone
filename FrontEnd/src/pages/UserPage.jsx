@@ -4,6 +4,7 @@ import UserPosts from "../components/UserPosts";
 import { useParams } from "react-router-dom";
 import useShowToast from "../hooks/useShowToast";
 import { Flex, Spinner } from "@chakra-ui/react";
+import Post from "../components/Post";
 
 const UserPage = () => {
   const [user, setUser] = useState(null);
@@ -69,7 +70,7 @@ const UserPage = () => {
       )}
 
       {posts.map((post) => (
-        <post key={post._id} post={post} postedBy={post.postedBy} />
+        <Post key={post._id} post={post} postedBy={post.postedBy} />
       ))}
       {/* <UserPosts
         likes={10}
