@@ -49,15 +49,16 @@ const Actions = ({ post: post_ }) => {
     }
   };
 
-  const handleReply = () => {
+  const handleReply = async () => {
     if (!user)
-      returnshowToast(
-    "Error", 
-    "You must be logged in to like a post", 
-    "error"
-    );
-    if(isReplying) return
-    setIsReplying(true)
+      returnshowToast("Error", "You must be logged in to like a post", "error");
+    if (isReplying) return;
+    setIsReplying(true);
+
+    try {
+    } catch (error) {
+      showToast("Error", error.message, "error");
+    }
   };
 
   return (
