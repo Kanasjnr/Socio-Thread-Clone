@@ -17,6 +17,7 @@ import Actions from "./Actions";
 import { useEffect, useState } from "react";
 import useShowToast from "../hooks/useShowToast";
 import { formatDistanceToNow } from "date-fns";
+import {DeleteIcon} from "@chakra-ui/icons"
 
 const Post = ({ post, postedBy }) => {
   const [liked, setLiked] = useState(false);
@@ -116,10 +117,11 @@ const Post = ({ post, postedBy }) => {
               onClick={(e) => e.preventDefault()}
             >
               <Text fontSize={"xs"} width={36} textAlign={"right"}>
-                1 hour ago
+                3 days ago
               </Text>
               {/* <Text> {formatDistanceToNow(new Date(post.createdAt))} ago </Text>  */}
-              <Menu>
+                {currentUser?._id === user._id && <DeleteIcon size={20} onClick={handleDelete}/>}
+              {/* <Menu>
                 <MenuButton>
                   <BsThreeDots cursor={"pointer"} />
                 </MenuButton>
@@ -137,7 +139,7 @@ const Post = ({ post, postedBy }) => {
                     <MenuItem color={"red"}>Report</MenuItem>
                   </MenuGroup>
                 </MenuList>
-              </Menu>
+              </Menu> */}
             </Flex>
           </Flex>
 
