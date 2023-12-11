@@ -6,18 +6,17 @@ import userAtom from "../atoms/userAtom";
 const Actions = ({ post: post_ }) => {
   const user = useRecoilValue(userAtom);
 
-  const [post, setPost] = useState(post_); 
+  const [post, setPost] = useState(post_);
 
   const [liked, setLiked] = useState(post.likes.includes(user?._id));
 
   return (
-    <>
+    <Flex flexDirection={"column"}>
       <Flex
         cursor={"pointer"}
         gap={3}
         my={"2"}
         onClick={(e) => e.preventDefault()}
-        flexDirection={"column"}
       >
         <svg
           aria-label="Unlike"
@@ -106,7 +105,7 @@ const Actions = ({ post: post_ }) => {
           <Text>{post.likes.length} likes</Text>
         </Flex>
       </Flex>
-    </>
+    </Flex>
   );
 };
 
