@@ -64,7 +64,8 @@ const UserPage = () => {
        {!fetchingPosts && posts.length === 0 && <h1> User has no posts</h1>}
        {fetchingPosts && (<Flex justifyContent={"center"} my={12}>
         <Spinner size={"xl"}/>
-       </Flex>)}
+       </Flex>)
+       }
       {/* <UserPosts
         likes={10}
         replies={50}
