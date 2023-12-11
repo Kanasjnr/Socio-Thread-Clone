@@ -165,7 +165,13 @@ const Actions = ({ post: post_ }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              size={"sm"}
+              isLoading={isReplying}
+              onClick={handleReply}
+            >
               Reply
             </Button>
           </ModalFooter>
