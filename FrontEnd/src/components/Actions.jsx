@@ -1,4 +1,19 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
@@ -56,6 +71,19 @@ const Actions = ({ post: post_ }) => {
     setIsReplying(true);
 
     try {
+      const res = await fetch("/api/posts/reply/" + post._id, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: reply }),
+      });
+      const data = await res.json();
+
+      setPost({ ...post, replies: [...post.replies, data] });
+      showToast("Success", "reply posted successfully", "success");
+      onClose()
+      setPost("")
     } catch (error) {
       showToast("Error", error.message, "error");
     }
@@ -108,11 +136,31 @@ const Actions = ({ post: post_ }) => {
         <RepostSVG />
         <ShareSVG />
       </Flex>
+
       <Flex gap={2} color={"gray.light"} fontSize={"sm"} alignItems={"center"}>
         <Text>{post.replies.length} replies</Text>
         <Box w={0.5} h={0.5} bg={"gray.light"} borderRadius={"full"}></Box>
         <Text>{post.likes.length} likes</Text>
       </Flex>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader></ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl>
+              <Input placeholder="Reply Goes here..." />
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3}>
+              Reply
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Flex>
   );
 };
