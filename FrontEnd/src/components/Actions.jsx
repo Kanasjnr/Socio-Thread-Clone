@@ -10,9 +10,12 @@ const Actions = ({ post: post_ }) => {
   const [post, setPost] = useState(post_);
 
   const [liked, setLiked] = useState(post.likes.includes(user?._id));
-  const [isLiking, setIsLiking] = useState(false)
+  const [isLiking, setIsLiking] = useState(false);
+  const [reply, setReply] = useState(false);
+  const [isReplying, setIsReplying] = useState(false);
 
   const showToast = useShowToast();
+
   const handleLikeAndUnlike = async () => {
     if (!user)
       return showToast(
@@ -21,8 +24,8 @@ const Actions = ({ post: post_ }) => {
         "error"
       );
 
-      if(isLiking) return 
-      setIsLiking(true)
+    if (isLiking) return;
+    setIsLiking(true);
     try {
       const res = await fetch("/api/posts/like/" + post._id, {
         method: "PUT",
@@ -41,7 +44,7 @@ const Actions = ({ post: post_ }) => {
       }
     } catch (error) {
       showToast("Error", error.message, "error");
-    }finally{
+    } finally {
       setIsLiking(false);
     }
   };
@@ -90,8 +93,8 @@ const Actions = ({ post: post_ }) => {
             stroke-width="2"
           ></path>
         </svg>
-        <RepostSVG/>
-        <ShareSVG/>
+        <RepostSVG />
+        <ShareSVG />
       </Flex>
       <Flex gap={2} color={"gray.light"} fontSize={"sm"} alignItems={"center"}>
         <Text>{post.replies.length} replies</Text>
