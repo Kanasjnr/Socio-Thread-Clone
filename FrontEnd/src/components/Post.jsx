@@ -156,16 +156,7 @@ const Post = ({ post, postedBy }) => {
             <Actions liked={liked} setLiked={setLiked} />
           </Flex>
 
-          <Flex
-            gap={2}
-            color={"gray.light"}
-            fontSize={"sm"}
-            alignItems={"center"}
-          >
-            <Text>{post.replies.length} replies</Text>
-            <Box w={0.5} h={0.5} bg={"gray.light"} borderRadius={"full"}></Box>
-            <Text>{post.likes.length} likes</Text>
-          </Flex>
+
         </Flex>
       </Flex>
     </Link>
