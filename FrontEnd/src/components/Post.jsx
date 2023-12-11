@@ -115,8 +115,10 @@ const Post = ({ post, postedBy }) => {
               gap={4}
               onClick={(e) => e.preventDefault()}
             >
-              <Text fontSize={"xs"} width={36} textAlign={"right"}>1 hour ago</Text>
-               {/* <Text> {formatDistanceToNow(new Date(post.createdAt))} ago </Text>  */}
+              <Text fontSize={"xs"} width={36} textAlign={"right"}>
+                1 hour ago
+              </Text>
+              {/* <Text> {formatDistanceToNow(new Date(post.createdAt))} ago </Text>  */}
               <Menu>
                 <MenuButton>
                   <BsThreeDots cursor={"pointer"} />

@@ -16,7 +16,7 @@ const UserHeader = ({ user }) => {
   const currentUser = useRecoilValue(userAtom);
   const [following, setFollowing] = useState(
     user.followers.includes(currentUser._id)
-  ); 
+  );
   const showToast = useShowToast();
   const [updating, setUpdating] = useState(false);
 
@@ -62,7 +62,6 @@ const UserHeader = ({ user }) => {
         user.followers.push(currentUser._id);
       }
       setFollowing(!following);
-    
     } catch (error) {
       showToast("Error", error, "error");
     } finally {
