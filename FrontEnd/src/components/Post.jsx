@@ -152,7 +152,7 @@ const Post = ({ post, postedBy }) => {
               <Image src={post.img} width={"full"} />
             </Box>
           )}
-          <Flex>
+          <Flex gap={3} my={1}>
             <Actions post={post} />
           </Flex>
         </Flex>
