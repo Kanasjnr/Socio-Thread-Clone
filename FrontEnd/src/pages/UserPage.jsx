@@ -29,9 +29,15 @@ const UserPage = () => {
       }
     };
 
-    const getPosts = async () =>{
-      
-    }
+    const getPosts = async () => {
+      try {
+        const res = await fetch(`/api/posts/user/${username}`);
+        const data = await res.json();
+        console.log(data);
+      } catch (error) {
+        showToast("Error", error.message, "error");
+      }
+    };
 
     getUser();
   }, [username, showToast]);
