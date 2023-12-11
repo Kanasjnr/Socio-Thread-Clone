@@ -10,6 +10,7 @@ const Actions = ({ post: post_ }) => {
   const [post, setPost] = useState(post_);
 
   const [liked, setLiked] = useState(post.likes.includes(user?._id));
+  const [isLiking, setIsLiking] = useState(false)
 
   const showToast = useShowToast();
   const handleLikeAndUnlike = async () => {
@@ -19,6 +20,9 @@ const Actions = ({ post: post_ }) => {
         "You must be logged in to like a post",
         "error"
       );
+
+      if(isLiking) return 
+      setIsLiking(true)
     try {
       const res = await fetch("/api/posts/like/" + post._id, {
         method: "PUT",
@@ -84,6 +88,8 @@ const Actions = ({ post: post_ }) => {
             stroke-width="2"
           ></path>
         </svg>
+        <RepostSVG/>
+        <ShareSVG/>
       </Flex>
       <Flex gap={2} color={"gray.light"} fontSize={"sm"} alignItems={"center"}>
         <Text>{post.replies.length} replies</Text>
