@@ -32,7 +32,7 @@ const Actions = ({ post: post_ }) => {
 
   const showToast = useShowToast();
 
-  const {isOpen, onOpen, onClose} = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleLikeAndUnlike = async () => {
     if (!user)
@@ -121,15 +121,16 @@ const Actions = ({ post: post_ }) => {
           ></path>
         </svg>
         <svg
-          aria-label="Reply"
+          aria-label="comment"
           class="x1lliihq x1n2onr6 x1yxark7"
           fill="currentColor"
           height="20"
           role="img"
           viewBox="0 0 24 24"
           width="20"
+          onClick={onOpen}
         >
-          <title>Reply</title>
+          <title>Comment</title>
           <path
             d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z"
             fill="none"
@@ -155,7 +156,11 @@ const Actions = ({ post: post_ }) => {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <Input placeholder="Reply Goes here..." />
+              <Input
+                placeholder="Reply Goes here..."
+                value={reply}
+                onChange={(e) => setReply(e.target.value)}
+              />
             </FormControl>
           </ModalBody>
 
