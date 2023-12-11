@@ -56,6 +56,8 @@ const Actions = ({ post: post_ }) => {
     "You must be logged in to like a post", 
     "error"
     );
+    if(isReplying) return
+    setIsReplying(true)
   };
 
   return (
