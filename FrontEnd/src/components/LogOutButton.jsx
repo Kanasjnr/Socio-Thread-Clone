@@ -29,7 +29,13 @@ const LogOutButton = () => {
     }
   };
   return (
-    <Button position={"fixed"} top={"30px"} right={"30px"} size={"sm"} onClick={handleLogOut}>
+    <Button
+      position={"fixed"}
+      top={"30px"}
+      right={"30px"}
+      size={"sm"}
+      onClick={handleLogOut}
+    >
       <AiOutlineLogout size={20} />
     </Button>
   );
