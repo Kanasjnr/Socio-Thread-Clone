@@ -1,12 +1,12 @@
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
 
-const Actions = ({ post: post__ }) => {
+const Actions = ({ post: post_ }) => {
   const user = useRecoilValue(userAtom);
 
-  const [post, setPost] = useState(post__); 
+  const [post, setPost] = useState(post_); 
 
   const [liked, setLiked] = useState(post.likes.includes(user?._id));
 
