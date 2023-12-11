@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
 
+const Actions = ({ post: post__ }) => {
+  const user = useRecoilValue(userAtom);
 
-const Actions = ({ post:post__ }) => {
-  const user = useRecoilValue(userAtom)
+  const [post, setPost] = useState(post__); 
 
-  const [liked, setLiked] = useState(post.likes.includes(user?._id))
+  const [liked, setLiked] = useState(post.likes.includes(user?._id));
+
   return (
     <>
       <Flex
