@@ -82,12 +82,12 @@ const Actions = ({ post: post_ }) => {
 
       setPost({ ...post, replies: [...post.replies, data] });
       showToast("Success", "reply posted successfully", "success");
-      onClose()
-      setPost("")
+      onClose();
+      setPost("");
     } catch (error) {
       showToast("Error", error.message, "error");
-    }finally{
-      isReplying(false)
+    } finally {
+      isReplying(false);
     }
   };
 
