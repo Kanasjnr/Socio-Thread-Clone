@@ -28,6 +28,11 @@ const UserPage = () => {
         setLoading(false);
       }
     };
+
+    const getPosts = async () =>{
+      
+    }
+
     getUser();
   }, [username, showToast]);
 
