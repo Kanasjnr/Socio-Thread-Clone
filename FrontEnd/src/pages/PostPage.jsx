@@ -19,29 +19,28 @@ import { useParams } from "react-router-dom";
 
 const PostPage = () => {
   const { user, loading } = useGetUserProfile();
-const [post, setPost] = useState(null)
-const showToast = useShowToast()
-const {pid} = useParams()
+  const [post, setPost] = useState(null);
+  const showToast = useShowToast();
+  const { pid } = useParams();
 
   useEffect(() => {
-    const getPost = async () =>{
+    const getPost = async () => {
       try {
-        const res = await fetch(`/api/posts/user/${pid}`)
-        const data = await res.json()
+        const res = await fetch(`/api/posts/user/${pid}`);
+        const data = await res.json();
 
-        if(data.error){
-          showToast("Error", data.error, "error")
-          return
+        if (data.error) {
+          showToast("Error", data.error, "error");
+          return;
         }
-        console.log(data)
+        console.log(data);
         setPost(data);
-        
       } catch (error) {
-        showToast("Error", error.message,"error")
+        showToast("Error", error.message, "error");
       }
-    }
-    getPost()
-  }, [showToast,pid]);
+    };
+    getPost();
+  }, [showToast, pid]);
 
   if (!user && loading) {
     return (
