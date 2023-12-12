@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import UserHeader from "../components/UserHeader";
 import UserPosts from "../components/UserPosts";
 import { useParams } from "react-router-dom";
@@ -6,6 +6,7 @@ import useShowToast from "../hooks/useShowToast";
 import { Flex, Spinner } from "@chakra-ui/react";
 import Post from "../components/Post";
 import useGetUserProfile from "../hooks/useGetUserProfile";
+import { useEffect } from "react";
 
 const UserPage = () => {
   const {user,loading} = useGetUserProfile()
