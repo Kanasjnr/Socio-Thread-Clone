@@ -44,9 +44,9 @@ const PostPage = () => {
     getPosts();
   }, [showToast, pid]);
 
-  const handleDeletePost = async (e) => {
+  const handleDeletePost = async () => {
     try {
-      e.preventDefault();
+      
       if (!window.confirm("Are you sure you want to delete this post?")) return;
 
       const res = await fetch(`/api/posts/${post._id}`, {
