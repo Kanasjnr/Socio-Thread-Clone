@@ -15,11 +15,11 @@ import Actions from "../components/Actions";
 import Comments from "../components/Comments";
 import { useEffect } from "react";
 import useShowToast from "../hooks/useShowToast";
-import useGetUserProfile from "../hooks/useGetUserProfile";
 
 const PostPage = () => {
   const { user, loading } = useGetUserProfile();
 const [post, setPost] = useState(null)
+const showToast = useShowToast()
   useEffect(() => {
     const getPost = async () =>{
 
