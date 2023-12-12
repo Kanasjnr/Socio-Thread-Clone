@@ -4,7 +4,7 @@ import Actions from "../components/Actions";
 import { useState } from "react";
 
 const Comments = ({ reply }) => {
-    const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(false);
   return (
     <>
       <Flex gap={4} my={2} py={2} w={"full"}>
@@ -18,14 +18,11 @@ const Comments = ({ reply }) => {
             <Text fontSize={"sm"} fontWeight={"bold"}>
               {username}
             </Text>
-           
           </Flex>
           <Text>{Comments}</Text>
-
-          
         </Flex>
       </Flex>
-      <Divider/>
+      <Divider />
     </>
   );
 };
