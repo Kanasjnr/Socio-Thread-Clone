@@ -8,7 +8,7 @@ const Comments = ({ reply }) => {
   return (
     <>
       <Flex gap={4} my={2} py={2} w={"full"}>
-        <Avatar name="Dan Abrahmov" src={userAvatar} size={"sm"} />
+        <Avatar name={username}src={userAvatar} size={"sm"} />
         <Flex flexDir={"column"} gap={1} w={"full"}>
           <Flex
             justifyContent={"space-between"}
