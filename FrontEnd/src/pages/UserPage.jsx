@@ -8,13 +8,14 @@ import Post from "../components/Post";
 import useGetUserProfile from "../hooks/useGetUserProfile";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import userAtom from "../atoms/userAtom";
+import postAtom from "../atoms/postAtom";
+
 
 const UserPage = () => {
   const {user,loading} = useGetUserProfile()
   const { username } = useParams();
   const showToast = useShowToast();
-  const [posts, setPosts] = useRecoilState(userAtom)
+  const [posts, setPosts] = useRecoilState(postAtom)
   const [fetchingPosts, setFetchingPosts] = useState(false);
 
   useEffect(() => {
