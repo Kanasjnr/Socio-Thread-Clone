@@ -3,8 +3,7 @@ import { BsThreeDots } from "react-icons/bs";
 import Actions from "../components/Actions";
 import { useState } from "react";
 
-const Comments = ({ reply,lastReply }) => {
-
+const Comments = ({ reply, lastReply }) => {
   return (
     <>
       <Flex gap={4} my={2} py={2} w={"full"}>
@@ -22,7 +21,7 @@ const Comments = ({ reply,lastReply }) => {
           <Text>{reply.text}</Text>
         </Flex>
       </Flex>
-      {!lastReply? <Divider/> : null}
+      {!lastReply ? <Divider /> : null}
     </>
   );
 };
