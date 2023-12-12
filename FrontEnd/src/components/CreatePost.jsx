@@ -15,6 +15,7 @@ import {
   ModalOverlay,
   Text,
   Textarea,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
@@ -88,12 +89,12 @@ const CreatePost = () => {
       <Button
         position={"fixed"}
         bottom={10}
-        right={10}
-        leftIcon={<AddIcon />}
-        bg={"gray"}
+        right={5}
+        size={{base:"sm", sm:"lg"}}
+        bg={useColorModeValue("gray.300", "gray.dark")}
         onClick={onOpen}
       >
-        Post
+        <AddIcon/>
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
