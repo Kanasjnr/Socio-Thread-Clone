@@ -16,10 +16,7 @@ import { useEffect } from "react";
 import useShowToast from "../hooks/useShowToast";
 
 const PostPage = () => {
-  
-
- 
-
+  const {user,loading}
   return (
     <>
       <Flex>
