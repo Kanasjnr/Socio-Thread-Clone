@@ -27,6 +27,11 @@ const {pid} = useParams()
     const getPost = async () =>{
       try {
         const res = await fetch(`/api/posts/user/${pid}`)
+        const data = await res.json()
+
+        if(data.error){
+          showToast("Error", data.error, "error")
+        }
         
       } catch (error) {
         showToast("Error", error.message,"error")
