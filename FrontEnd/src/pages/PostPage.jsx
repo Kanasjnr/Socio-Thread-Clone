@@ -40,7 +40,8 @@ const {pid} = useParams()
         showToast("Error", error.message,"error")
       }
     }
-  }, []);
+    getPost()
+  }, [showToast,pid]);
 
   if (!user && loading) {
     return (
