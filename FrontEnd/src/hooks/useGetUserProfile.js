@@ -4,7 +4,7 @@ import useShowToast from "./useShowToast";
 
 const useGetUserProfile = () => {
   const [user, setUser] = useState(null);
-  const [loading, setLoding] = useState(true);
+  const [loading, setLoading] = useState(true);
   const { username } = useParams();
   const showToast = useShowToast();
 
