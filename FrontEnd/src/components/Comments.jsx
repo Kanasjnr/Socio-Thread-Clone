@@ -20,7 +20,7 @@ const Comments = ({ reply }) => {
             </Text>
             <Flex gap={2} alignItems={"center"}>
               <Text fontSize={"sm"} color={"gray.light"}>
-              
+                {createdAt}
               </Text>
               <BsThreeDots />
             </Flex>
