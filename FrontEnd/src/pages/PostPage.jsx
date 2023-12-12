@@ -85,21 +85,7 @@ const PostPage = () => {
         userAvatar={"https://bit.ly/dan-abramov"}
       />
 
-      <Comments
-        Comments={" Boy"}
-        createdAt={"3 hrs Ago"}
-        likes={"20"}
-        username={"Doe"}
-        userAvatar={"https://bit.ly/sage-adebayo"}
-      />
-
-      <Comments
-        Comments={"Joe"}
-        createdAt={"6 min Ago"}
-        likes={"20"}
-        username={"easy"}
-        userAvatar={"https://bit.ly/code-beast"}
-      />
+      
     </>
   );
 };
