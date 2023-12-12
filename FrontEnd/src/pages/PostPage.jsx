@@ -18,7 +18,7 @@ import useShowToast from "../hooks/useShowToast";
 const PostPage = () => {
   // const [liked, setLiked] = useState(false);
   const [user, setUser] = useState(null);
-  const showToast = useShowToast()
+  const showToast = useShowToast();
 
   useEffect(() => {
     const getUser = async () => {
@@ -36,8 +36,8 @@ const PostPage = () => {
       } finally {
         setLoading(false);
       }
-    }
-    getUser()
+    };
+    getUser();
   }, []);
 
   return (
