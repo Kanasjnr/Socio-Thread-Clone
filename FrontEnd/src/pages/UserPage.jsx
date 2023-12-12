@@ -7,7 +7,6 @@ import { Flex, Spinner } from "@chakra-ui/react";
 import Post from "../components/Post";
 
 const UserPage = () => {
-  const [user, setUser] = useState(null);
   const { username } = useParams();
   const showToast = useShowToast();
   const [posts, setPosts] = useState([]);
