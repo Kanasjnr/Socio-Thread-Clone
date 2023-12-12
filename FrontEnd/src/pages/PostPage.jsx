@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import Actions from "../components/Actions";
 import useShowToast from "../hooks/useShowToast";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useGetUserProfile from "../hooks/useGetUserProfile";
 import { formatDistanceToNow } from "date-fns";
 import { DeleteIcon } from "@chakra-ui/icons";
@@ -25,6 +25,7 @@ const PostPage = () => {
   const showToast = useShowToast();
   const { pid } = useParams();
   const currentUser = useRecoilValue(userAtom);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getPosts = async () => {
