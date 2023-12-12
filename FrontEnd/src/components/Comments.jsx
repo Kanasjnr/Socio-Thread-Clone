@@ -27,8 +27,7 @@ const Comments = ({  }) => {
           </Flex>
           <Text>{Comments}</Text>
 
-          <Actions liked={liked} setLiked={setLiked} />
-          <Text> {likes + (liked ? 1 : 0)}likes</Text>
+          
         </Flex>
       </Flex>
     </>
