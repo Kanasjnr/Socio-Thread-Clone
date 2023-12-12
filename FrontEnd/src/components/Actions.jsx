@@ -20,6 +20,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
 import useShowToast from "../hooks/useShowToast";
 import postAtom from "../atoms/postAtom";
+import Post from "./Post";
 
 const Actions = ({ post }) => {
   const user = useRecoilValue(userAtom);
@@ -102,6 +103,13 @@ const Actions = ({ post }) => {
       if (data.error) {
         showToast("Error: ", data.error, "error");
       }
+      const updatedPosts = posts.map((p)=> {
+        if(p._id === Post._id)  {
+          return {...p, replies: [...p.replies,data]}
+        }
+        return p
+      })
+      setPosts(updatedPosts)
 
       showToast("Success", "reply posted successfully", "success");
       onClose();
