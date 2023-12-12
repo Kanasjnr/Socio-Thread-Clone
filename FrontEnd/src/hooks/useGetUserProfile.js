@@ -8,6 +8,7 @@ const useGetUserProfile = () => {
   const [loading, setLoading] = useState(true);
   const { username } = useParams();
   const showToast = useShowToast();
+  const {pid} = useParams();
 
   useEffect(() => {
     const getUser = async () => {
