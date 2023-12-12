@@ -164,7 +164,7 @@ const Post = ({ post, postedBy, setPosts }) => {
             </Box>
           )}
           <Flex gap={3} my={1}>
-            <Actions post={post} setPosts={setPosts}/>
+            <Actions post={post} />
           </Flex>
         </Flex>
       </Flex>
