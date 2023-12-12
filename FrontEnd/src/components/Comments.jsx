@@ -30,7 +30,7 @@ const Comments = ({  }) => {
           
         </Flex>
       </Flex>
-      <Divider
+      <Divider/>
     </>
   );
 };
