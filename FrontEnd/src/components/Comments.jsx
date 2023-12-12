@@ -3,7 +3,7 @@ import { BsThreeDots } from "react-icons/bs";
 import Actions from "../components/Actions";
 import { useState } from "react";
 
-const Comments = ({  }) => {
+const Comments = ({ reply }) => {
     const [liked, setLiked] = useState(false);
   return (
     <>
