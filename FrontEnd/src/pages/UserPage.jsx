@@ -14,8 +14,6 @@ const UserPage = () => {
   const [fetchingPosts, setFetchingPosts] = useState(false);
 
   useEffect(() => {
-    
-
     const getPosts = async () => {
       setFetchingPosts(true);
       try {
@@ -30,7 +28,6 @@ const UserPage = () => {
         setFetchingPosts(false);
       }
     };
-
 
     getPosts();
   }, [username, showToast]);
@@ -55,7 +52,7 @@ const UserPage = () => {
 
       {posts.map((post) => (
         <Post key={post._id} post={post} postedBy={post.postedBy} />
-      ))} 
+      ))}
       {/* <UserPosts
         likes={10}
         replies={50}
