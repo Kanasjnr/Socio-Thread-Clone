@@ -20,11 +20,12 @@ import { formatDistanceToNow } from "date-fns";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
+import postAtom from "../atoms/postAtom";
 
 const Post = ({ post, postedBy, setPosts }) => {
   const [liked, setLiked] = useState(false);
   const [user, setUser] = useState(null);
-
+const [post,setPost] = useRecoilValue(postAtom)
   const showToast = useShowToast();
   const navigate = useNavigate();
   const currentUser = useRecoilValue(userAtom);
