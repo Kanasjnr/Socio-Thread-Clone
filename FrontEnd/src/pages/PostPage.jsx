@@ -98,7 +98,7 @@ const PostPage = () => {
       <Flex gap={2} color={"gray.light"} fontSize={"sm"} alignItems={"center"}>
         <Text>250 Replies</Text>
         <Box w={0.5} h={0.5} borderRadius={"full"} bg={"gray.light"}></Box>
-        {/* <Text>{20 + (liked ? 1 : 0)}likes</Text> */}
+         <Text>{post.likes.length} likes</Text> 
       </Flex>
 
       <Divider my={4} />
