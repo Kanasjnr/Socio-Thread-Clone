@@ -74,6 +74,7 @@ const Actions = ({ post }) => {
           }
           return p;
         });
+        setPosts(updatedPosts)
       }
       setLiked(!liked);
     } catch (error) {
