@@ -4,11 +4,11 @@ import Actions from "../components/Actions";
 import { useState } from "react";
 
 const Comments = ({ reply }) => {
-  const [liked, setLiked] = useState(false);
+
   return (
     <>
       <Flex gap={4} my={2} py={2} w={"full"}>
-        <Avatar name={username}src={userAvatar} size={"sm"} />
+        <Avatar name={reply.username} src={reply.userProfilePic} size={"sm"} />
         <Flex flexDir={"column"} gap={1} w={"full"}>
           <Flex
             justifyContent={"space-between"}
@@ -16,7 +16,7 @@ const Comments = ({ reply }) => {
             w={"full"}
           >
             <Text fontSize={"sm"} fontWeight={"bold"}>
-              {username}
+              {/* {reply.username} */}
             </Text>
           </Flex>
           <Text>{reply}</Text>
