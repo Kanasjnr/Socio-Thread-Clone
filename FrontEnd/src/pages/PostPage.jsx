@@ -16,6 +16,7 @@ import Comments from "../components/Comments";
 import { useEffect } from "react";
 import useShowToast from "../hooks/useShowToast";
 import { useParams } from "react-router-dom";
+import useGetUserProfile from "../hooks/useGetUserProfile";
 
 const PostPage = () => {
   const { user, loading } = useGetUserProfile();
@@ -61,7 +62,7 @@ const PostPage = () => {
         >
           <Flex alignItems={"center"}>
             <Avatar src={user.profilePic} name="Aliu Musa" size={"md"} mr={2} />
-            <Text fontSize={"sm"}>{user.user}</Text>
+            <Text fontSize={"sm"}>{user.username}</Text>
             <Image src="/verified.png" h={4} w={4} ml={2} />
           </Flex>
 
@@ -90,13 +91,13 @@ const PostPage = () => {
       </Box>
 
       <Flex>
-        <Actions liked={liked} setLiked={setLiked} />
+        {/* <Actions liked={liked} setLiked={setLiked} /> */}
       </Flex>
 
       <Flex gap={2} color={"gray.light"} fontSize={"sm"} alignItems={"center"}>
         <Text>250 Replies</Text>
         <Box w={0.5} h={0.5} borderRadius={"full"} bg={"gray.light"}></Box>
-        <Text>{20 + (liked ? 1 : 0)}likes</Text>
+        {/* <Text>{20 + (liked ? 1 : 0)}likes</Text> */}
       </Flex>
 
       <Divider my={4} />
