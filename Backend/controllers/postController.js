@@ -5,7 +5,7 @@ const cloudinary = require("cloudinary").v2;
 const createPost = async (req, res) => {
   try {
     const { postedBy, text } = req.body;
-    let {img} = req.body
+    let { img } = req.body;
 
     if (!postedBy && !text) {
       return res
@@ -27,9 +27,9 @@ const createPost = async (req, res) => {
         .json({ message: `Text must be less than ${maxLength} characters` });
     }
 
-    if(img){
-      const uploadedResponse = await cloudinary.uploader.upload(img)
-      img = uploadedResponse.secure_url
+    if (img) {
+      const uploadedResponse = await cloudinary.uploader.upload(img);
+      img = uploadedResponse.secure_url;
     }
 
     const newPost = new Post({ postedBy, text, img });
@@ -60,26 +60,28 @@ const getPost = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
+    console.log(post.img);
 
     if (!post) {
-      return res.status(404).json({ message: "post not found" });
+      return res.status(404).json({ message: "Post not found" });
     }
 
     if (post.postedBy.toString() !== req.user._id.toString()) {
-      return res.status(404).json({ message: "unathorized to delete post" });
+      return res
+        .status(401)
+        .json({ message: "Unauthorized to delete this post" }); //Unauthorized
     }
 
-    if(post.img){
-      const imgId = post.img.spilt("/").pop().spilt('.')[0]
-      await cloudinary.uploader.destroy(imgId)
+    if (post.img) {
+      const imgId = post.img.split("/").pop().split(".")[0];
+      await cloudinary.uploader.destroy(imgId);
     }
 
     await Post.findByIdAndDelete(req.params.id);
-
-    res.status(200).json({ message: "post deleted successfully" });
+    res.status(200).json({ message: "Post deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
-    console.log("Error in delete post: ", error.message);
+    res.status(500).json({ message: error.message }); //Internal server error
+    console.log("Error in Delete Post: ", error.message);
   }
 };
 
@@ -166,12 +168,12 @@ const getUserPosts = async (req, res) => {
   try {
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(404).json({ message:"User not found"})
+      return res.status(404).json({ message: "User not found" });
     }
     const posts = await Post.find({ postedBy: user._id }).sort({
       createdAt: -1,
     });
-    res.status(200).json( posts );
+    res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -183,5 +185,5 @@ module.exports = {
   deletePost,
   likeUnlikePost,
   replyToPost,
-  getUserPosts
+  getUserPosts,
 };

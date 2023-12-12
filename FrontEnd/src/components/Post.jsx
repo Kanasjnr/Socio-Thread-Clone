@@ -57,8 +57,14 @@ const Post = ({ post, postedBy }) => {
         return;
       const res = await fetch(`/api/posts/${post._id}`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
       });
+      const data = await res.json();
+
+      if (data.error) {
+        showToast("Error", data.error, "error");
+        return;
+      }
+      showToast("Success", "Post Deleted", "success");
     } catch (error) {
       showToast("Error", error.message, "error");
     }
