@@ -22,7 +22,11 @@ const [post, setPost] = useState(null)
 const showToast = useShowToast()
   useEffect(() => {
     const getPost = async () =>{
-
+      try {
+        
+      } catch (error) {
+        
+      }
     }
   }, []);
 
