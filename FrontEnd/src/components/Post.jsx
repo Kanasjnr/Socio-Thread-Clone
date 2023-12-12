@@ -25,7 +25,7 @@ import postAtom from "../atoms/postAtom";
 const Post = ({ post, postedBy, setPosts }) => {
   const [liked, setLiked] = useState(false);
   const [user, setUser] = useState(null);
-const [post,setPost] = useRecoilValue(postAtom)
+// const [post,setPost] = useRecoilValue(postAtom)
   const showToast = useShowToast();
   const navigate = useNavigate();
   const currentUser = useRecoilValue(userAtom);
@@ -47,7 +47,7 @@ const [post,setPost] = useRecoilValue(postAtom)
       }
     };
     getUser();
-  }, [postedBy, showToast]);
+  }, [postedBy, showToast, ]);
 
   if (!user) return null;
 
