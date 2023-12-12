@@ -38,7 +38,7 @@ export default function App() {
             <CreatePost/>
           </>
         ) :(
-          
+          <UserPage/>
         )} />
 
         <Route path="/:username/post/:pid" element={<PostPage />} />
