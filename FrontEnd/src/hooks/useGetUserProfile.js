@@ -26,7 +26,7 @@ const useGetUserProfile = () => {
       }
     };
     getUser();
-  }, [username]);
+  }, [username, showToast]);
 };
 
 export default useGetUserProfile;
