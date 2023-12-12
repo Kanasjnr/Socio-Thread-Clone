@@ -23,6 +23,7 @@ const showToast = useShowToast()
   useEffect(() => {
     const getPost = async () =>{
       try {
+        const res = await fetch(`/api/posts/`)
         
       } catch (error) {
         
