@@ -25,7 +25,7 @@ const PostPage = () => {
   const showToast = useShowToast();
   const { pid } = useParams();
   const currentUser = useRecoilValue(userAtom);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getPosts = async () => {
@@ -47,7 +47,6 @@ const PostPage = () => {
 
   const handleDeletePost = async () => {
     try {
-      
       if (!window.confirm("Are you sure you want to delete this post?")) return;
 
       const res = await fetch(`/api/posts/${post._id}`, {
@@ -62,7 +61,7 @@ const PostPage = () => {
       }
       showToast("Success", "Post deleted successfully", "success");
 
-      navigate(`/${user.username}`)
+      navigate(`/${user.username}`);
     } catch (error) {
       showToast("Error", error.message, "error");
     }
@@ -144,16 +143,10 @@ const PostPage = () => {
       </Flex>
 
       <Divider my={4} />
-          {post.replies.map(reply =>{
-            <Comment 
-            key={reply._id}
-            reply={reply}
-          })}
-      
-
-      </Divider>
-
-
+      {post.replies.map((reply) => {
+        <Comment key={reply._id} reply={reply} />;
+      })}
+      <Divider my={4}></Divider>
 
       {/* <Comments username={'Ryan Florence'} likes={12} createdAt={'2 min ago'} userAvatar={'https://bit.ly/ryan-florence'} comment={"Keep it up!!"} /> */}
     </>
