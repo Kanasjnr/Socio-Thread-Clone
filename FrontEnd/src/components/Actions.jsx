@@ -74,7 +74,7 @@ const Actions = ({ post }) => {
           }
           return p;
         });
-        setPosts(updatedPosts)
+        setPosts(updatedPosts);
       }
       setLiked(!liked);
     } catch (error) {
@@ -99,8 +99,10 @@ const Actions = ({ post }) => {
         body: JSON.stringify({ text: reply }),
       });
       const data = await res.json();
+      if (data.error) {
+        showToast("Error: ", data.error, "error");
+      }
 
-      setPost({ ...post, replies: [...post.replies, data] });
       showToast("Success", "reply posted successfully", "success");
       onClose();
       setReply("");
