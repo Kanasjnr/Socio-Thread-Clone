@@ -41,7 +41,8 @@ const {pid} = useParams()
         showToast("Error", error.message,"error")
       }
     }
-  }, []);
+    getPost()
+  }, [showToast,pid]);
 
   if (!user && loading) {
     return (
@@ -96,7 +97,7 @@ const {pid} = useParams()
       </Flex>
 
       <Flex gap={2} color={"gray.light"} fontSize={"sm"} alignItems={"center"}>
-        <Text>250 Replies</Text>
+        <Text>{post.replies.length} Replies</Text>
         <Box w={0.5} h={0.5} borderRadius={"full"} bg={"gray.light"}></Box>
         <Text>{post.likes.length}</Text>
       </Flex>

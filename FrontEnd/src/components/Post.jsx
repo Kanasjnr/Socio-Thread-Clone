@@ -60,11 +60,10 @@ const Post = ({ post, postedBy }) => {
       });
       const data = await res.json();
 
-      if (data.error) {
+      if(data.error){
         showToast("Error", data.error, "error");
-        return;
+        return
       }
-      showToast("Success", "Post Deleted", "success");
     } catch (error) {
       showToast("Error", error.message, "error");
     }
@@ -147,7 +146,25 @@ const Post = ({ post, postedBy }) => {
               {currentUser?._id === user._id && (
                 <DeleteIcon size={20} onClick={handleDeletePost} />
               )}
-             
+              {/* <Menu>
+                <MenuButton>
+                  <BsThreeDots cursor={"pointer"} />
+                </MenuButton>
+                <MenuList>
+                  <MenuGroup>
+                    <MenuItem color={"gray.light"}>Mute</MenuItem>
+                  </MenuGroup>
+                  <MenuDivider />
+                  <MenuGroup>
+                    <MenuItem color={"red"}>Block</MenuItem>
+                    <MenuItem color={"gray.light"}>Hide</MenuItem>
+                  </MenuGroup>
+                  <MenuDivider />
+                  <MenuGroup>
+                    <MenuItem color={"red"}>Report</MenuItem>
+                  </MenuGroup>
+                </MenuList>
+              </Menu> */}
             </Flex>
           </Flex>
 
