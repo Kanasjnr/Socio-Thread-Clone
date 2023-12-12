@@ -1,11 +1,7 @@
-import React from 'react'
+import { useState } from 'react'
 
 const useGetUserProfile = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+ const [user, setUser] = useState()
 }
 
 export default useGetUserProfile
