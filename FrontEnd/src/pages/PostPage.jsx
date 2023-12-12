@@ -16,7 +16,7 @@ import { useEffect } from "react";
 
 const PostPage = () => {
   // const [liked, setLiked] = useState(false);
-  useEffect
+  useEffect(() => {}, []);
 
   return (
     <>
