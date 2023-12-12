@@ -51,6 +51,7 @@ const PostPage = () => {
     );
   }
 
+  if(!post) return null
   return (
     <>
       <Flex>
@@ -91,7 +92,7 @@ const PostPage = () => {
       </Box>
 
       <Flex>
-        {/* <Actions liked={liked} setLiked={setLiked} /> */}
+        <Actions post={post}/>
       </Flex>
 
       <Flex gap={2} color={"gray.light"} fontSize={"sm"} alignItems={"center"}>
