@@ -1,12 +1,32 @@
-import { useState } from 'react'
-import { useParams } from 'react-router-dom'
-import useShowToast from './useShowToast'
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import useShowToast from "./useShowToast";
 
 const useGetUserProfile = () => {
- const [user, setUser] = useState(null)
- const [loading, setLoding] = useState(true)
- const {username} = useParams()
- const showToast = useShowToast()
-}
+  const [user, setUser] = useState(null);
+  const [loading, setLoding] = useState(true);
+  const { username } = useParams();
+  const showToast = useShowToast();
 
-export default useGetUserProfile
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await fetch(`/api/users/profile/${username}`);
+        const data = await res.json();
+
+        if (data.error) {
+          showToast("Error", data.error, "error");
+          return;
+        }
+        setUser(data);
+      } catch (error) {
+        showToast("Error", error, "error");
+      } finally {
+        setLoading(false);
+      }
+    };
+    getUser();
+  }, []);
+};
+
+export default useGetUserProfile;
