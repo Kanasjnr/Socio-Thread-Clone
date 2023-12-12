@@ -6,6 +6,7 @@ import {
   Divider,
   Flex,
   Image,
+  Spinner,
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -17,9 +18,16 @@ import useShowToast from "../hooks/useShowToast";
 import useGetUserProfile from "../hooks/useGetUserProfile";
 
 const PostPage = () => {
-  const {user,loading}= useGetUserProfile()
+  const { user, loading } = useGetUserProfile();
 
-  
+  if (!user && loading) {
+    return (
+      <Flex justifyContent={"center"}>
+        <Spinner size={"xl"} />
+      </Flex>
+    );
+  }
+
   return (
     <>
       <Flex>
