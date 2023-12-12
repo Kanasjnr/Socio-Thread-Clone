@@ -19,7 +19,7 @@ const Comments = ({ reply }) => {
               {username}
             </Text>
           </Flex>
-          <Text>{Comments}</Text>
+          <Text>{reply}</Text>
         </Flex>
       </Flex>
       <Divider />
