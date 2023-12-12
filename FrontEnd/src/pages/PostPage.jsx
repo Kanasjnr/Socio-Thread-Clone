@@ -14,9 +14,12 @@ import Actions from "../components/Actions";
 import Comments from "../components/Comments";
 import { useEffect } from "react";
 import useShowToast from "../hooks/useShowToast";
+import useGetUserProfile from "../hooks/useGetUserProfile";
 
 const PostPage = () => {
-  const {user,loading}
+  const {user,loading}= useGetUserProfile()
+
+  
   return (
     <>
       <Flex>
