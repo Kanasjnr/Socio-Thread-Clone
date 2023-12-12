@@ -16,14 +16,15 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
 import useShowToast from "../hooks/useShowToast";
+import postAtom from "../atoms/postAtom";
 
 const Actions = ({ post: post_ }) => {
   const user = useRecoilValue(userAtom);
 
-  const [post, setPost] = useState(post_);
+  const [post, setPost] = useRecoilState(postAtom)
 
   const [liked, setLiked] = useState(post.likes.includes(user?._id));
   const [isLiking, setIsLiking] = useState(false);

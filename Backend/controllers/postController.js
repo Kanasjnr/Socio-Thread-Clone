@@ -35,7 +35,7 @@ const createPost = async (req, res) => {
     const newPost = new Post({ postedBy, text, img });
     await newPost.save();
 
-    res.status(201).json({ message: "post successfully created", newPost });
+    res.status(201).json( newPost );
   } catch (error) {
     res.status(500).json({ message: error.message });
     console.log("Error in create post: ", error.message);
