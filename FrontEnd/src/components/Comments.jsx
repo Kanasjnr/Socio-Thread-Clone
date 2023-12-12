@@ -18,12 +18,7 @@ const Comments = ({ reply }) => {
             <Text fontSize={"sm"} fontWeight={"bold"}>
               {username}
             </Text>
-            <Flex gap={2} alignItems={"center"}>
-              <Text fontSize={"sm"} color={"gray.light"}>
-                {createdAt}
-              </Text>
-              <BsThreeDots />
-            </Flex>
+           
           </Flex>
           <Text>{Comments}</Text>
 
