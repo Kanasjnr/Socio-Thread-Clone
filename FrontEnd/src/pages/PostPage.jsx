@@ -18,7 +18,7 @@ const PostPage = () => {
   // const [liked, setLiked] = useState(false);
   const [user, setUser] = useState(null);
   useEffect(() => {
-    const getUser = async ()=>{}
+    const getUser = async () => {};
   }, []);
 
   return (
