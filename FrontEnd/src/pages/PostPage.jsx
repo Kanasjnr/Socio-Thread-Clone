@@ -16,9 +16,7 @@ import { useEffect } from "react";
 import useShowToast from "../hooks/useShowToast";
 
 const PostPage = () => {
-  // const [liked, setLiked] = useState(false);
-  const [user, setUser] = useState(null);
-  const showToast = useShowToast();
+  
 
  
 
