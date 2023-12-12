@@ -21,10 +21,10 @@ import userAtom from "../atoms/userAtom";
 import useShowToast from "../hooks/useShowToast";
 import postAtom from "../atoms/postAtom";
 
-const Actions = ({ post: post_ }) => {
+const Actions = ({ post}) => {
   const user = useRecoilValue(userAtom);
 
-  const [post, setPost] = useRecoilState(postAtom)
+  const [posts, setPosts] = useRecoilState(postAtom)
 
   const [liked, setLiked] = useState(post.likes.includes(user?._id));
   const [isLiking, setIsLiking] = useState(false);
