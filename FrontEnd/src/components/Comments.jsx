@@ -1,4 +1,4 @@
-import { Avatar, Flex, Text } from "@chakra-ui/react";
+import { Avatar, Divider, Flex, Text } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
 import Actions from "../components/Actions";
 import { useState } from "react";
@@ -30,6 +30,7 @@ const Comments = ({  }) => {
           
         </Flex>
       </Flex>
+      <Divider
     </>
   );
 };
