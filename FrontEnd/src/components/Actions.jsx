@@ -56,7 +56,7 @@ const Actions = ({ post}) => {
       console.log(data);
       if (!liked) {
         //Add the id of the user to the likes array
-        setPost({ ...post, likes: [...post.likes, user._id] });
+        
       } else {
         //remove the id of the user from the likes array
         setPost({ ...post, likes: post.likes.filter((id) => id !== user._id) });
