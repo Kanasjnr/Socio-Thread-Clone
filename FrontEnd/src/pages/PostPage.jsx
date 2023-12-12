@@ -12,9 +12,11 @@ import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import Actions from "../components/Actions";
 import Comments from "../components/Comments";
+import { useEffect } from "react";
 
 const PostPage = () => {
   // const [liked, setLiked] = useState(false);
+  useEffect
 
   return (
     <>
