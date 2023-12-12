@@ -15,15 +15,18 @@ import Actions from "../components/Actions";
 import Comments from "../components/Comments";
 import { useEffect } from "react";
 import useShowToast from "../hooks/useShowToast";
+import { useParams } from "react-router-dom";
 
 const PostPage = () => {
   const { user, loading } = useGetUserProfile();
 const [post, setPost] = useState(null)
 const showToast = useShowToast()
+const {pid} = useParams()
+
   useEffect(() => {
     const getPost = async () =>{
       try {
-        const res = await fetch(`/api/posts/user/${username}`)
+        const res = await fetch(`/api/posts/user/${pid}`)
         
       } catch (error) {
         showToast("Error", error.message,"error")

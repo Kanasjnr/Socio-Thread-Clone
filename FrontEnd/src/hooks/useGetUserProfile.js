@@ -8,12 +8,11 @@ const useGetUserProfile = () => {
   const [loading, setLoading] = useState(true);
   const { username } = useParams();
   const showToast = useShowToast();
-  const {pid} = useParams();
 
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await fetch(`/api/users/profile/${pid}`);
+        const res = await fetch(`/api/users/profile/${username}`);
         const data = await res.json();
 
         if (data.error) {
