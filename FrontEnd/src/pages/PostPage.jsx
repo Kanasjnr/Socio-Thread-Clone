@@ -84,8 +84,6 @@ const PostPage = () => {
         username={"easy"}
         userAvatar={"https://bit.ly/dan-abramov"}
       />
-
-      
     </>
   );
 };
