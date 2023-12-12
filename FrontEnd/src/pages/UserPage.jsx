@@ -10,7 +10,6 @@ const UserPage = () => {
   const [user, setUser] = useState(null);
   const { username } = useParams();
   const showToast = useShowToast();
-  const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [fetchingPosts, setFetchingPosts] = useState(false);
 
