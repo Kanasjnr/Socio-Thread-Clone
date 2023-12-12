@@ -20,6 +20,8 @@ import useGetUserProfile from "../hooks/useGetUserProfile";
 const PostPage = () => {
   const { user, loading } = useGetUserProfile();
 
+  useEffect(() => {}, []);
+  
   if (!user && loading) {
     return (
       <Flex justifyContent={"center"}>
