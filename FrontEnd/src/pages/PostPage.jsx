@@ -18,30 +18,30 @@ import useShowToast from "../hooks/useShowToast";
 import { useParams } from "react-router-dom";
 import useGetUserProfile from "../hooks/useGetUserProfile";
 
+
 const PostPage = () => {
   const { user, loading } = useGetUserProfile();
-  const [post, setPost] = useState(null);
-  const showToast = useShowToast();
-  const { pid } = useParams();
+const [post, setPost] = useState(null)
+const showToast = useShowToast()
+const {pid} = useParams()
+
 
   useEffect(() => {
-    const getPost = async () => {
+    const getPost = async () =>{
       try {
-        const res = await fetch(`/api/posts/user/${pid}`);
-        const data = await res.json();
+        const res = await fetch(`/api/posts/${pid}`)
+        const data = await res.json()
 
         if (data.error) {
-          showToast("Error", data.error, "error");
-          return;
+          showToast("Error", data.error, "error")
+          return
         }
-        console.log(data);
-        setPost(data);
+        
       } catch (error) {
-        showToast("Error", error.message, "error");
+        showToast("Error", error.message,"error")
       }
-    };
-    getPost();
-  }, [showToast, pid]);
+    }
+  }, []);
 
   if (!user && loading) {
     return (
@@ -50,8 +50,8 @@ const PostPage = () => {
       </Flex>
     );
   }
+  if (!post) return null
 
-  if(!post) return null
   return (
     <>
       <Flex>
@@ -63,7 +63,7 @@ const PostPage = () => {
         >
           <Flex alignItems={"center"}>
             <Avatar src={user.profilePic} name="Aliu Musa" size={"md"} mr={2} />
-            <Text fontSize={"sm"}>{user.username}</Text>
+            <Text fontSize={"sm"}>{user.user}</Text>
             <Image src="/verified.png" h={4} w={4} ml={2} />
           </Flex>
 
@@ -88,17 +88,17 @@ const PostPage = () => {
         border={"1px solid"}
         borderColor={"gray.light"}
       >
-        <Image src="/post1.png" w={"full"} />
+        <Image src={"/post1.png"} w={"full"} />
       </Box>
 
       <Flex>
-        <Actions post={post}/>
+        <Actions post={post} />
       </Flex>
 
       <Flex gap={2} color={"gray.light"} fontSize={"sm"} alignItems={"center"}>
         <Text>250 Replies</Text>
         <Box w={0.5} h={0.5} borderRadius={"full"} bg={"gray.light"}></Box>
-         <Text>{post.likes.length} likes</Text> 
+        <Text>{post.likes.length}</Text>
       </Flex>
 
       <Divider my={4} />

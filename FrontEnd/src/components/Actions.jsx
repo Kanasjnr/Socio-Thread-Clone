@@ -60,6 +60,7 @@ const Actions = ({ post: post_ }) => {
         //remove the id of the user from the likes array
         setPost({ ...post, likes: post.likes.filter((id) => id !== user._id) });
       }
+      setLiked(!liked)
     } catch (error) {
       showToast("Error", error.message, "error");
     } finally {
