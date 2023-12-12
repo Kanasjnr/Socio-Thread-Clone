@@ -21,10 +21,10 @@ import userAtom from "../atoms/userAtom";
 import useShowToast from "../hooks/useShowToast";
 import postAtom from "../atoms/postAtom";
 
-const Actions = ({ post}) => {
+const Actions = ({ post }) => {
   const user = useRecoilValue(userAtom);
 
-  const [posts, setPosts] = useRecoilState(postAtom)
+  const [posts, setPosts] = useRecoilState(postAtom);
 
   const [liked, setLiked] = useState(post.likes.includes(user?._id));
   const [isLiking, setIsLiking] = useState(false);
@@ -56,17 +56,26 @@ const Actions = ({ post}) => {
       console.log(data);
       if (!liked) {
         //Add the id of the user to the likes array
-        const updatedPosts = posts.map((p) =>{
-          if(p._id === post._id){
-            return{...p, likes: [...p.likes, user._id]}
+        const updatedPosts = posts.map((p) => {
+          if (p._id === post._id) {
+            return { ...p, likes: [...p.likes, user._id] };
           }
-          return p
-        })
-        setPosts(updatedPosts)
+          return p;
+        });
+        setPosts(updatedPosts);
       } else {
         //remove the id of the user from the likes array
+        const updatedPosts = posts.map((p) => {
+          if (p._id === post._id) {
+            return {
+              ...p,
+              likes: [...p.likes.filter((id) => id !== user._id)],
+            };
+          }
+          return p;
+        });
       }
-      setLiked(!liked)
+      setLiked(!liked);
     } catch (error) {
       showToast("Error", error.message, "error");
     } finally {
