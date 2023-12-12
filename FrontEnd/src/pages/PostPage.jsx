@@ -19,10 +19,10 @@ import useGetUserProfile from "../hooks/useGetUserProfile";
 
 const PostPage = () => {
   const { user, loading } = useGetUserProfile();
-
+const [post, setPost] = useState(null)
   useEffect(() => {
     const getPost = async () =>{
-      
+
     }
   }, []);
 
