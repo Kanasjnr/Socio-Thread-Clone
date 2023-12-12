@@ -77,13 +77,13 @@ const PostPage = () => {
 
       <Divider my={4} />
 
-      <Comments
+      {/* <Comments
         Comments={"Bbay Boy"}
         createdAt={"3 min Ago"}
         likes={"20"}
         username={"easy"}
         userAvatar={"https://bit.ly/dan-abramov"}
-      />
+      /> */}
     </>
   );
 };
