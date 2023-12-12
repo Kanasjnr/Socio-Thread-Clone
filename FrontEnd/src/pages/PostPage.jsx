@@ -18,6 +18,7 @@ import useGetUserProfile from "../hooks/useGetUserProfile";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
+import Comments from "../components/Comments";
 
 const PostPage = () => {
   const { user, loading } = useGetUserProfile();
@@ -142,11 +143,10 @@ const PostPage = () => {
         <Button>Get</Button>
       </Flex>
 
-      <Divider my={4} >
-      {post.replies.map(reply => (
-        <Comment key={reply._id} reply={reply} />
+      <Divider my={4} />
+      {post.replies.map((reply) => (
+        <Comments key={reply._id} reply={reply}  lastReply={reply._id === post.replies.length}/>
       ))}
-      </Divider>
     </>
   );
 };

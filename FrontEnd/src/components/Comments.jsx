@@ -16,10 +16,10 @@ const Comments = ({ reply }) => {
             w={"full"}
           >
             <Text fontSize={"sm"} fontWeight={"bold"}>
-              {/* {reply.username} */}
+              {reply.username}
             </Text>
           </Flex>
-          <Text>{reply}</Text>
+          <Text>{reply.text}</Text>
         </Flex>
       </Flex>
       <Divider />
