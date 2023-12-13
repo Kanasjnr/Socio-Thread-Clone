@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
 import { AiFillHome, AiOutlineLogout } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
-import {FiLogOut} from "react-icons/fi"
+import { FiLogOut } from "react-icons/fi";
 import { Link as RouterLink } from "react-router-dom";
 // import RxAvatar from "./RxAvatar";
 
@@ -36,7 +36,7 @@ const Header = () => {
           <Link as={RouterLink} to={`/${user.username}`}>
             <RxAvatar fontSize={24} />
           </Link>
-          <Button  >
+          <Button>
             <FiLogOut size={20} />
           </Button>
         </Flex>
