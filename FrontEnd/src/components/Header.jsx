@@ -5,14 +5,14 @@ import { AiFillHome, AiOutlineLogout } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
 import { FiLogOut } from "react-icons/fi";
 import { Link as RouterLink } from "react-router-dom";
-import useLogOut from "../hooks/useLogOut.js"
+import useLogOut from "../hooks/useLogOut.js";
 // import RxAvatar from "./RxAvatar";
 
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const user = useRecoilValue(userAtom);
 
-  const logout = useLogOut()
+  const logout = useLogOut();
 
   return (
     <Flex justifyContent={"space-between"} mt={6} mb="12">
@@ -27,7 +27,7 @@ const Header = () => {
           Login
         </Link>
       )}
-      
+
       <Image
         cursor="pointer"
         alt="logo"
@@ -45,6 +45,11 @@ const Header = () => {
             <FiLogOut size={20} />
           </Button>
         </Flex>
+      )}
+      {!user && (
+        <Link as={RouterLink} to="/">
+          Sign Up
+        </Link>
       )}
     </Flex>
   );
