@@ -103,13 +103,13 @@ const Actions = ({ post }) => {
       if (data.error) {
         showToast("Error: ", data.error, "error");
       }
-      const updatedPosts = posts.map((p)=> {
-        if(p._id === post._id)  {
-          return {...p, replies: [...p.replies,data]}
+      const updatedPosts = posts.map((p) => {
+        if (p._id === post._id) {
+          return { ...p, replies: [...p.replies, data] };
         }
-        return p
-      })
-      setPosts(updatedPosts)
+        return p;
+      });
+      setPosts(updatedPosts);
 
       showToast("Success", "reply posted successfully", "success");
       onClose();
