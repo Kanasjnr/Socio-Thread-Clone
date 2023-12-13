@@ -21,10 +21,10 @@ const Header = () => {
           <AiFillHome fontSize={24} />
         </Link>
       )}
-      
-      {user && (
+
+      {!user && (
         <Link as={RouterLink} to="/">
-          <AiFillHome fontSize={24} />
+          <Login/>
         </Link>
       )}
       
