@@ -14,7 +14,7 @@ const Header = () => {
   const user = useRecoilValue(userAtom);
 
   const logout = useLogOut();
-  const setAuthScreen = useSetRecoilState(authScreenAtom)
+  const setAuthScreen = useSetRecoilState(authScreenAtom);
 
   return (
     <Flex justifyContent={"space-between"} mt={6} mb="12">
@@ -49,7 +49,11 @@ const Header = () => {
         </Flex>
       )}
       {!user && (
-        <Link as={RouterLink} to="/auth" onClick={() => setAuthScreen("signUp")}>
+        <Link
+          as={RouterLink}
+          to="/auth"
+          onClick={() => setAuthScreen("signUp")}
+        >
           Sign Up
         </Link>
       )}
