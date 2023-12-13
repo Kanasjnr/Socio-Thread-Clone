@@ -59,6 +59,6 @@ const Header = () => {
       )}
     </Flex>
   );
-};
+      }
 
 export default Header;
