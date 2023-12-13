@@ -24,7 +24,7 @@ const Header = () => {
 
       {!user && (
         <Link as={RouterLink} to="/">
-          <Login/>
+          Login
         </Link>
       )}
       
