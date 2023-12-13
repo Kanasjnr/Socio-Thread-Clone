@@ -22,6 +22,12 @@ const Header = () => {
         </Link>
       )}
       
+      {user && (
+        <Link as={RouterLink} to="/">
+          <AiFillHome fontSize={24} />
+        </Link>
+      )}
+      
       <Image
         cursor="pointer"
         alt="logo"
