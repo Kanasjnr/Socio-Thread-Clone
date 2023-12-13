@@ -31,8 +31,8 @@ const HomePage = () => {
       }
     };
     getFeedPosts();
-  }, [showToast,setPosts]);
-  
+  }, [showToast, setPosts]);
+
   return (
     <>
       {!loading && posts && posts.length === 0 && (
