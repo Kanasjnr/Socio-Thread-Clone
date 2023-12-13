@@ -32,7 +32,7 @@ export default function UpdateProfilePage() {
   const { imgUrl, handleImageChange } = usePreviwImg();
   const showToast = useShowToast();
   const [updating, setUpdating] = useState();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -161,7 +161,7 @@ export default function UpdateProfilePage() {
               _hover={{
                 bg: "red.500",
               }}
-              onClick={ () => navigate(-1)}
+              onClick={() => navigate(-1)}
             >
               Cancel
             </Button>
