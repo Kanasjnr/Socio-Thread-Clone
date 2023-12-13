@@ -1,8 +1,9 @@
-import { Flex, Image, useColorMode, Link } from "@chakra-ui/react";
+import { Flex, Image, useColorMode, Link, Button } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
-import { AiFillHome } from "react-icons/ai";
+import { AiFillHome, AiOutlineLogout } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
+import {FiLogOut} from "react-icons/fi"
 import { Link as RouterLink } from "react-router-dom";
 // import RxAvatar from "./RxAvatar";
 
@@ -31,9 +32,14 @@ const Header = () => {
       />
 
       {user && (
-        <Link as={RouterLink} to={`/${user.username}`}>
-          <RxAvatar fontSize={24} />
-        </Link>
+        <Flex>
+          <Link as={RouterLink} to={`/${user.username}`}>
+            <RxAvatar fontSize={24} />
+          </Link>
+          <Button alignItems={"center"} >
+            <FiLogOut size={20} />
+          </Button>
+        </Flex>
       )}
     </Flex>
   );
