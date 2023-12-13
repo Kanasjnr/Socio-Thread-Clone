@@ -147,7 +147,7 @@ const followUnFollowUser = async (req, res) => {
 };
 const updateUser = async (req, res) => {
   const { name, email, username, password, bio } = req.body;
-  let {profilePic} = req.body
+  let { profilePic } = req.body;
   const userId = req.user._id;
 
   try {
@@ -165,12 +165,14 @@ const updateUser = async (req, res) => {
       user.password = hashedPassword;
     }
 
-    if(profilePic){
-      if(user.profilePic){
-        await cloudinary.uploader.destroy(user.profilePic.split("/").pop().split(".") [0])
+    if (profilePic) {
+      if (user.profilePic) {
+        await cloudinary.uploader.destroy(
+          user.profilePic.split("/").pop().split(".")[0]
+        );
       }
-      const uploadResponse = await cloudinary.uploader.upload(profilePic)
-      profilePic = uploadResponse.secure_url
+      const uploadResponse = await cloudinary.uploader.upload(profilePic);
+      profilePic = uploadResponse.secure_url;
     }
 
     user.name = name || user.name;
@@ -181,9 +183,9 @@ const updateUser = async (req, res) => {
 
     user = await user.save();
 
-    user.password  = null
+    user.password = null;
 
-    res.status(200).json({user });
+    res.status(200).json({ user });
   } catch (error) {
     res.status(500).json({ error: error.message });
     console.log("Error in update User: ", error.message);
