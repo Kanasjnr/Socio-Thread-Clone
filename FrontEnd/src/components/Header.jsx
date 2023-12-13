@@ -11,6 +11,7 @@ import useLogOut from "../hooks/useLogOut.js"
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const user = useRecoilValue(userAtom);
+
   const logout = useLogOut()
 
   return (
