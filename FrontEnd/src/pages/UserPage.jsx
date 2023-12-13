@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import UserHeader from "../components/UserHeader";
 import UserPosts from "../components/UserPosts";
 import { useParams } from "react-router-dom";
@@ -10,12 +10,11 @@ import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import postAtom from "../atoms/postAtom";
 
-
 const UserPage = () => {
-  const {user,loading} = useGetUserProfile()
+  const { user, loading } = useGetUserProfile();
   const { username } = useParams();
   const showToast = useShowToast();
-  const [posts, setPosts] = useRecoilState(postAtom)
+  const [posts, setPosts] = useRecoilState(postAtom);
   const [fetchingPosts, setFetchingPosts] = useState(false);
 
   useEffect(() => {
@@ -57,7 +56,12 @@ const UserPage = () => {
       )}
 
       {posts.map((post) => (
-        <Post key={post._id} post={post} postedBy={post.postedBy} setPosts={setPosts} />
+        <Post
+          key={post._id}
+          post={post}
+          postedBy={post.postedBy}
+          setPosts={setPosts}
+        />
       ))}
       {/* <UserPosts
         likes={10}
